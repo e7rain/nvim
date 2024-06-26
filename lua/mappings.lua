@@ -29,28 +29,6 @@ end, { desc = "Find config files nvim" })
 
 map("n", "<leader>o", "<cmd>Oil --float<cr>", { desc = "Oil" })
 
--- Flash search
-map({ "n", "x", "o" }, "s", function()
-  require("flash").jump {
-    remote_op = {
-      restore = true,
-      motion = nil,
-    },
-  }
-end, { desc = "Flash" })
-map({ "n", "x", "o" }, "S", function()
-  require("flash").treesitter()
-end, { desc = "Flash" })
-map("o", "R", function()
-  require("flash").remote()
-end, { desc = "Flash remote" })
-map({ "x", "o" }, "r", function()
-  require("flash").treesitter_search()
-end, { desc = "Treesitter search" })
-map({ "c" }, "<c-s>", function()
-  require("flash").toggle()
-end, { desc = "Toggle flash" })
-
 map({ "n", "v" }, "<leader>yy", '"+y', { desc = "Copy to clipboard system" })
 map("n", "<leader>pp", '"+gP', { desc = "Paste from clipboard system" })
 
@@ -68,7 +46,7 @@ map("n", "<leader>tP", require("neotest").output_panel.toggle, { desc = "Preview
 map("n", "[t", require("neotest").jump.prev, { desc = "Jump prev test" })
 map("n", "]t", require("neotest").jump.next, { desc = "Jump next test" })
 
--- nomap("n", "<leader>gb")
+map("n", "<leader>gg", "<cmd>Git<cr>", { desc = "Git" })
 map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branchs" })
 map("n", "<leader>gp", require("gitsigns").preview_hunk_inline, { desc = "preview hunk inline" })
 map("n", "<leader>gP", require("gitsigns").preview_hunk, { desc = "preview hunk" })
