@@ -27,10 +27,7 @@ map("n", "<leader>fa", function()
   }
 end, { desc = "Find config files nvim" })
 
-map("n", "<leader>o", "<cmd>Oil --float<cr>", { desc = "Oil" })
-
-map({ "n", "v" }, "<leader>yy", '"+y', { desc = "Copy to clipboard system" })
-map("n", "<leader>pp", '"+gP', { desc = "Paste from clipboard system" })
+map("n", "<leader>o", "<cmd>Oil --float<cr>", { desc = "Oil 🖿" })
 
 -- Test
 map("n", "<leader>tt", require("neotest").run.run, { desc = "Run test" })
@@ -77,8 +74,11 @@ map("n", "<leader>up", function()
 end, { desc = "Toggle autopair" })
 
 map("n", "<leader>q", "<cmd>q!<cr>", { desc = "Quit window" })
-
 map("t", "<esc>", "<C-\\><C-n>")
 
--- map("n", "\\", "<cmd>split<cr>", { desc = "New horizontal split" })
--- map("n", "|", "<cmd>vsplit<cr>", { desc = "New vertical split" })
+-- Pegado especial
+vim.keymap.set("n", "<leader>p", function()
+  local val = vim.fn.getreg "+"
+  vim.api.nvim_command [[normal! p]]
+  vim.fn.setreg("+", val)
+end, { desc = "Paste 📋" })
