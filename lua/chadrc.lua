@@ -6,7 +6,7 @@ local M = {}
 
 M.ui = {
   -- transparency = true,
-  theme = "rosepine",
+  theme = "tokyodark",
   statusline = {
     theme = "vscode",
     separator_style = "block",
