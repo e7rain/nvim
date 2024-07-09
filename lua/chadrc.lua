@@ -6,7 +6,7 @@ local M = {}
 
 M.ui = {
   -- transparency = true,
-  theme = "rosepine",
+  theme = "rosepine-dawn",
   statusline = {
     theme = "vscode",
     separator_style = "block",
@@ -32,6 +32,10 @@ M.ui = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },
   },
+}
+
+M.lsp = {
+  signature = true,
 }
 
 M.base46 = {
