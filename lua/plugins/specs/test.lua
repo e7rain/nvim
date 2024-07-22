@@ -16,6 +16,7 @@ return {
             -- jestCommand = "pnpm run test --",
             -- cwd = function(path) return vim.fn.getcwd() end,
           },
+          require "rustaceanvim.neotest",
         },
       })
 

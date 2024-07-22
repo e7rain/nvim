@@ -22,11 +22,13 @@ return {
     },
   },
   config = function(_, opts)
-    local map = vim.keymap.set
-    map("n", "rf", "<Cmd>HurlRunner<CR>", { desc = "Run all" })
-    map("n", "rr", "<Cmd>HurlRunnerAt<CR>", { desc = "Run request" })
-    map("n", "re", "<Cmd>HurlRunnerToEntry<CR>", { desc = "Run request entry" })
-    map("n", "rv", "<Cmd>HurlVerbose<CR>", { desc = "Run request verbose" })
+    local wk = require "which-key"
+    wk.add {
+      { "<leader>r", group = "󱂛  Http client" }, -- group
+      { "<leader>rf", "<Cmd>HurlRunner<CR>", desc = "󱂛  Run file request", mode = "n" },
+      { "<leader>rr", "<Cmd>HurlRunnerAt<CR>", desc = "󱂛  Run request", mode = "n" },
+      { "<leader>re", "<Cmd>HurlRunnerToEntry<CR>", desc = "󱂛  Run request entry", mode = "n" },
+    }
     require("hurl").setup(opts)
   end,
 }

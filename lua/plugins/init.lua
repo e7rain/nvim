@@ -1,4 +1,5 @@
 return {
+  { import = "plugins.specs.lsp_signature" },
   { import = "plugins.specs.rust" },
   { import = "plugins.specs.dap" },
   { import = "plugins.specs.test" },
@@ -54,7 +55,7 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "typescript-language-server",
+        -- "typescript-language-server",
         "yaml-language-server",
         "lua-language-server",
         "stylua",
@@ -68,6 +69,7 @@ return {
         "docker-compose-language-service",
         "dockerfile-language-server",
         "hadolint",
+        "vtsls",
       },
     },
   },

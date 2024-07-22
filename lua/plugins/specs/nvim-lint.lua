@@ -1,25 +1,12 @@
 return {
-  enabled = false,
   "mfussenegger/nvim-lint",
-  -- ft = {
-  --   "typescript",
-  --   "typescriptreact",
-  --   "javascript",
-  --   "javascriptreact",
-  -- },
   opts = {
     linters_by_ft = {
-      typescript = { "eslint_d" },
-      javascript = { "eslint_d" },
-      javascriptreact = { "eslint_d" },
-      typescriptreact = { "eslint_d" },
       ["docker-compose"] = { "hadolint" },
     },
   },
   config = function(_, opts)
-    -- npm install -g eslint_d
     local utils = require "utils"
-
     local lint = require "lint"
     lint.linters_by_ft = opts.linters_by_ft
 

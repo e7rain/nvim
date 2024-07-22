@@ -5,13 +5,13 @@ local spec = {
   init = function()
     vim.keymap.set(
       "n",
-      "<leader>xx",
+      "<leader>xX",
       "<cmd>Trouble diagnostics toggle focus=true<cr>",
       { desc = "Diagnostics (Trouble)" }
     )
     vim.keymap.set(
       "n",
-      "<leader>xX",
+      "<leader>xx",
       "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>",
       { desc = "Diagnostics Buffer (Trouble)" }
     )

@@ -5,4 +5,7 @@ return {
     opts = {},
     event = "BufRead package.json",
   },
+  {
+    "yioneko/nvim-vtsls",
+  },
 }

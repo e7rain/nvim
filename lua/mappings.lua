@@ -3,6 +3,13 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 local nomap = vim.keymap.del
 
+local wk = require "which-key"
+wk.add {
+  { "<leader>g", group = "git" }, -- group
+  { "<leader>gg", "<cmd>Git<cr>", { desc = "Git", mode = "n" } },
+  { "<leader>o", "<cmd>Oil --float<cr>", { desc = "Oil", mode = "n" } },
+}
+
 -- resize windows
 map({ "n", "t" }, "<c-left>", require("smart-splits").resize_left)
 map({ "n", "t" }, "<c-down>", require("smart-splits").resize_down)
@@ -27,8 +34,6 @@ map("n", "<leader>fa", function()
   }
 end, { desc = "Find config files nvim" })
 
-map("n", "<leader>o", "<cmd>Oil --float<cr>", { desc = "Oil 🖿" })
-
 -- Test
 map("n", "<leader>tt", require("neotest").run.run, { desc = "Run test" })
 map("n", "<leader>td", function()
@@ -43,7 +48,6 @@ map("n", "<leader>tP", require("neotest").output_panel.toggle, { desc = "Preview
 map("n", "[t", require("neotest").jump.prev, { desc = "Jump prev test" })
 map("n", "]t", require("neotest").jump.next, { desc = "Jump next test" })
 
-map("n", "<leader>gg", "<cmd>Git<cr>", { desc = "Git" })
 map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branchs" })
 map("n", "<leader>gp", require("gitsigns").preview_hunk_inline, { desc = "preview hunk inline" })
 map("n", "<leader>gP", require("gitsigns").preview_hunk, { desc = "preview hunk" })
@@ -68,7 +72,7 @@ map("n", "<leader>us", function()
 end, { desc = "Toggle spell" })
 map("n", "<leader>uw", function()
   require("toggles").wrap()
-end, { desc = "Toggle spell" })
+end, { desc = "Toggle wrap" })
 map("n", "<leader>up", function()
   require("toggles").autopairs()
 end, { desc = "Toggle autopair" })

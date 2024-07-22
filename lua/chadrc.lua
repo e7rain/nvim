@@ -6,7 +6,8 @@ local M = {}
 
 M.ui = {
   -- transparency = true,
-  theme = "rosepine-dawn",
+  theme = "nightfox",
+  theme_toggle = { "nightfox", "nightfox" },
   statusline = {
     theme = "vscode",
     separator_style = "block",
@@ -50,10 +51,5 @@ M.base46 = {
     "trouble",
   },
 }
-
--- M.base46.integrations = {
---   "dap",
---   "todo",
--- }
 
 return M
