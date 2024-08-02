@@ -3,6 +3,7 @@ return {
   opts = {
     linters_by_ft = {
       ["docker-compose"] = { "hadolint" },
+      ["rust"] = { "clippy" },
     },
   },
   config = function(_, opts)

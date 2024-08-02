@@ -23,6 +23,7 @@ local options = {
     "html",
     "css",
     "hurl",
+    "http",
     "tmux",
     "bash",
     "regex",

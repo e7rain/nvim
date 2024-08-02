@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "checkhealth",
+    "kulala*",
     "fugitive*",
     "dap.log",
     "git",

@@ -6,7 +6,7 @@ local M = {}
 
 M.ui = {
   -- transparency = true,
-  theme = "rosepine",
+  theme = "nightfox",
   theme_toggle = { "nightfox", "nightfox" },
   statusline = {
     theme = "vscode",

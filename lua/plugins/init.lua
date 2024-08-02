@@ -11,7 +11,10 @@ return {
   { import = "plugins.specs.trouble" },
   { import = "plugins.specs.smart-split" },
   { import = "plugins.specs.typescript-tools" },
+  { import = "plugins.specs.kulala" },
+  { import = "plugins.specs.markdown" },
   { import = "plugins.specs.hurl" },
+  -- { import = "plugins.specs.neophyte" },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
