@@ -1,3 +1,17 @@
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
+    "hurl",
+  },
+  callback = function()
+    local wk = require "which-key"
+    wk.add {
+      { "<leader>rf", "<Cmd>HurlRunner<CR>", desc = "󱂛  Run file request", mode = "n", buffer = true },
+      { "<leader>rr", "<Cmd>HurlRunnerAt<CR>", desc = "󱂛  Run request", mode = "n", buffer = true },
+      { "<leader>re", "<Cmd>HurlRunnerToEntry<CR>", desc = "󱂛  Run request entry", mode = "n", buffer = true },
+    }
+  end,
+})
+
 return {
   "jellydn/hurl.nvim",
   dependencies = {
@@ -21,14 +35,4 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    local wk = require "which-key"
-    wk.add {
-      { "<leader>r", group = "󱂛  Http client" }, -- group
-      { "<leader>rf", "<Cmd>HurlRunner<CR>", desc = "󱂛  Run file request", mode = "n" },
-      { "<leader>rr", "<Cmd>HurlRunnerAt<CR>", desc = "󱂛  Run request", mode = "n" },
-      { "<leader>re", "<Cmd>HurlRunnerToEntry<CR>", desc = "󱂛  Run request entry", mode = "n" },
-    }
-    require("hurl").setup(opts)
-  end,
 }

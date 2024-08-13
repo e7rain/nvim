@@ -1,5 +1,5 @@
 return {
-  { import = "plugins.specs.lsp_signature" },
+  -- { import = "plugins.specs.lsp_signature" },
   { import = "plugins.specs.rust" },
   { import = "plugins.specs.dap" },
   { import = "plugins.specs.test" },
@@ -14,29 +14,23 @@ return {
   { import = "plugins.specs.kulala" },
   { import = "plugins.specs.markdown" },
   { import = "plugins.specs.hurl" },
-  -- { import = "plugins.specs.neophyte" },
+  { import = "plugins.specs.python" },
+  { import = "plugins.specs.diffview" },
+  { import = "plugins.specs.oil" },
+  { import = "plugins.specs.surround" },
+  { import = "plugins.specs.zenmode" },
   {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    lazy = false,
+    "echasnovski/mini.bufremove",
+  },
+  {
+    "stevearc/conform.nvim",
+    event = "BufWritePre", -- uncomment for format on save
     config = function()
-      require("nvim-surround").setup {
-        keymaps = {
-          insert = "<C-g>s",
-          insert_line = "<C-g>S",
-          normal = "ys",
-          normal_cur = "yss",
-          normal_line = "yS",
-          normal_cur_line = "ySS",
-          visual = "S",
-          visual_line = "gS",
-          delete = "ds",
-          change = "cs",
-          change_line = "cS",
-        },
-      }
+      require "configs.conform"
     end,
   },
+
   {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
@@ -56,6 +50,7 @@ return {
 
   {
     "williamboman/mason.nvim",
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     opts = {
       ensure_installed = {
         -- "typescript-language-server",
@@ -64,15 +59,29 @@ return {
         "stylua",
         "html-lsp",
         "css-lsp",
+        -- Javascript
         "prettierd",
         "eslint-lsp",
         "json-lsp",
         "js-debug-adapter",
         "chrome-debug-adapter",
+        "vtsls",
+        -- Docker
         "docker-compose-language-service",
         "dockerfile-language-server",
         "hadolint",
-        "vtsls",
+        -- Python
+        "basedpyright",
+        "isort",
+        "black",
+        -- Go
+        "gopls",
+        "gomodifytags",
+        "iferr",
+        "impl",
+        "gotests",
+        "goimports",
+        "delve",
       },
     },
   },
@@ -108,40 +117,6 @@ return {
       }
 
       return config
-    end,
-  },
-  {
-    "stevearc/oil.nvim",
-    cmd = { "Oil" },
-    lazy = true,
-    opts = {},
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("oil").setup {
-        default_file_explorer = true,
-        delete_to_trash = true,
-        skip_confirm_for_simple_edits = true,
-        view_options = {
-          show_hidden = true,
-          natural_order = true,
-          is_always_hidden = function(name, _)
-            return name == ".." or name == ".git"
-          end,
-        },
-        float = {
-          padding = 2,
-          max_width = 90,
-          max_height = 0,
-        },
-        win_options = {
-          wrap = true,
-          winblend = 0,
-        },
-        keymaps = {
-          ["<C-c>"] = false,
-          ["q"] = "actions.close",
-        },
-      }
     end,
   },
 }

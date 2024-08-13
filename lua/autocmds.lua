@@ -15,8 +15,8 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "checkhealth",
-    "kulala*",
     "fugitive*",
+    "kulala*",
     "dap.log",
     "git",
     "help",
@@ -27,6 +27,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "query",
   },
   callback = function()
-    vim.keymap.set("n", "q", vim.cmd.close, { desc = "Close the current buffer", buffer = true })
+    vim.keymap.set("n", "q", vim.cmd.close, { desc = "close the current buffer", buffer = true })
   end,
 })

@@ -27,10 +27,6 @@ end, { silent = true, buffer = bufnr })
 --   vim.cmd.RustLsp { "moveItem", "down" }
 -- end, { silent = true, buffer = bufnr })
 
-map("n", "<leader>li", function()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end, { desc = "Toggle Inlay Hints" })
-
 map("n", "<leader>lr", function()
   require "nvchad.lsp.renamer"()
 end, opts "Rename current symbol")

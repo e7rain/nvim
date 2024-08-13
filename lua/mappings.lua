@@ -7,7 +7,15 @@ local wk = require "which-key"
 wk.add {
   { "<leader>g", group = "git" }, -- group
   { "<leader>gg", "<cmd>Git<cr>", { desc = "Git", mode = "n" } },
-  { "<leader>o", "<cmd>Oil --float<cr>", { desc = "Oil", mode = "n" } },
+  { "-", "<cmd>Oil<cr>", { desc = "Oil", mode = "n" } },
+}
+
+wk.add {
+  { "<leader>r", group = "󱂛  Http client" }, -- group
+}
+
+wk.add {
+  { "<leader>z", "<cmd>ZenMode<cr>", { desc = "Zen mode" } }, -- group
 }
 
 -- resize windows
@@ -49,9 +57,9 @@ map("n", "[t", require("neotest").jump.prev, { desc = "Jump prev test" })
 map("n", "]t", require("neotest").jump.next, { desc = "Jump next test" })
 
 map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branchs" })
-map("n", "<leader>gp", require("gitsigns").preview_hunk_inline, { desc = "preview hunk inline" })
-map("n", "<leader>gP", require("gitsigns").preview_hunk, { desc = "preview hunk" })
-map("n", "<leader>gd", "<cmd>Gvdiff<cr>", { desc = "Git diff" })
+map("n", "<leader>gh", require("gitsigns").preview_hunk_inline, { desc = "preview hunk inline" })
+map("n", "<leader>gH", require("gitsigns").preview_hunk, { desc = "preview hunk" })
+map("n", "<leader>gd", "<cmd>Gvdiffsplit<cr>", { desc = "Git diff" })
 
 -- Disable mappings
 nomap("n", "<leader>rn")
@@ -60,7 +68,7 @@ nomap("n", "<leader>ch")
 nomap("n", "<leader>cm")
 
 map("n", "<leader>c", function()
-  require("nvchad.tabufline").close_buffer()
+  require("mini.bufremove").delete()
 end, { desc = "Close buffer" })
 
 -- Toggles
@@ -80,9 +88,13 @@ end, { desc = "Toggle autopair" })
 map("n", "<leader>q", "<cmd>q!<cr>", { desc = "Quit window" })
 map("t", "<esc>", "<C-\\><C-n>")
 
+map("n", "<leader>li", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle Inlay Hints" })
+
 -- Pegado especial
-vim.keymap.set("n", "<leader>p", function()
-  local val = vim.fn.getreg "+"
-  vim.api.nvim_command [[normal! p]]
-  vim.fn.setreg("+", val)
-end, { desc = "Paste 📋" })
+-- vim.keymap.set("n", "<leader>p", function()
+--   local val = vim.fn.getreg "+"
+--   vim.api.nvim_command [[normal! p]]
+--   vim.fn.setreg("+", val)
+-- end, { desc = "Paste 📋" })

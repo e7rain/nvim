@@ -8,6 +8,7 @@ return {
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/neotest-jest",
+      -- "nvim-neotest/neotest-python",
     },
     config = function(_, opts_)
       local opts = vim.tbl_extend("force", opts_, {
@@ -16,6 +17,7 @@ return {
             -- jestCommand = "pnpm run test --",
             -- cwd = function(path) return vim.fn.getcwd() end,
           },
+          -- require "neotest-python",
           require "rustaceanvim.neotest",
         },
       })

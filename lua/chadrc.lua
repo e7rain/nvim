@@ -5,12 +5,14 @@
 local M = {}
 
 M.ui = {
-  -- transparency = true,
-  theme = "nightfox",
-  theme_toggle = { "nightfox", "nightfox" },
+  theme = "rosepine",
+  theme_toggle = { "rosepine", "rosepine" },
+  tabufline = {
+    enabled = false,
+  },
   statusline = {
-    theme = "vscode",
-    separator_style = "block",
+    theme = "minimal",
+    separator_style = "default",
   },
   cmp = {
     style = "flat_dark",
@@ -32,6 +34,8 @@ M.ui = {
     Boolean = { bold = true },
     Comment = { italic = true },
     ["@comment"] = { italic = true },
+    ["@string"] = { italic = true },
+    ["@variable.builtin"] = { italic = true },
   },
 }
 
@@ -40,6 +44,7 @@ M.lsp = {
 }
 
 M.base46 = {
+  -- transparency = true,
   integrations = {
     "cmp",
     "git",

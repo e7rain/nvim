@@ -21,3 +21,5 @@ vim.filetype.add {
     ["http"] = "http",
   },
 }
+
+vim.opt.guifont = "Intel One Mono:w11:b:i, Symbols Nerd Font, Noto Color Emoji"

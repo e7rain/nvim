@@ -1,3 +1,19 @@
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
+    "http",
+  },
+  callback = function()
+    local wk = require "which-key"
+    local k = require "kulala"
+    wk.add {
+      { "<leader>rr", k.run, desc = "󱂛  Request run", mode = "n", buffer = true },
+      { "<leader>rc", k.copy, desc = "󱂛  Copy request", mode = "n", buffer = true },
+      { "[r", k.jump_prev, desc = "󱂛  jump prev", mode = "n", buffer = true },
+      { "]r", k.jump_next, desc = "󱂛  jump next", mode = "n", buffer = true },
+    }
+  end,
+})
+
 return {
   {
     "mistweaverco/kulala.nvim",
@@ -6,69 +22,35 @@ return {
     config = function()
       local kulala = require "kulala"
       kulala.setup {
-        -- default_view, body or headers
         default_view = "headers_body",
-        -- dev, test, prod, can be anything
-        -- see: https://learn.microsoft.com/en-us/aspnet/core/test/http-files?view=aspnetcore-8.0#environment-files
         default_env = "dev",
-        -- enable/disable debug mode
-        debug = true,
-        -- default formatters for different content types
-        formatters = {
-          json = { "jq", "." },
-          xml = { "xmllint", "--format", "-" },
-          html = { "xmllint", "--format", "--html", "-" },
+        contenttypes = {
+          ["application/json"] = {
+            ft = "json",
+            formatter = { "jq", "." },
+            pathresolver = require("kulala.parser.jsonpath").parse,
+          },
+          ["application/xml"] = {
+            ft = "xml",
+            formatter = { "xmllint", "--format", "-" },
+            pathresolver = { "xmllint", "--xpath", "{{path}}", "-" },
+          },
+          ["text/html"] = {
+            ft = "html",
+            formatter = { "xmllint", "--format", "--html", "-" },
+            pathresolver = {},
+          },
         },
-        -- default icons
         icons = {
           inlay = {
             loading = "⏳",
             done = "✅",
-            error = "❌",
+            error = "✗",
           },
           lualine = "🐼",
         },
-        -- additional cURL options
-        -- see: https://curl.se/docs/manpage.html
-        additional_curl_options = {},
+        -- additional_curl_options = { "-A", "Mozilla/5.0" },
         winbar = false,
-      }
-
-      local wk = require "which-key"
-      wk.add {
-        { "<leader>r", group = "󱂛  Http client" }, -- group
-        {
-          "<leader>rr",
-          function()
-            kulala.run()
-          end,
-          desc = "󱂛  Request run",
-          mode = "n",
-        },
-        {
-          "<leader>rc",
-          function()
-            kulala.copy()
-          end,
-          desc = "󱂛  Request copy",
-          mode = "n",
-        },
-        {
-          "[r",
-          function()
-            kulala.jump_prev()
-          end,
-          desc = "󱂛  Jump prev request",
-          mode = "n",
-        },
-        {
-          "]r",
-          function()
-            kulala.jump_next()
-          end,
-          desc = "󱂛  Jump prev request",
-          mode = "n",
-        },
       }
     end,
   },

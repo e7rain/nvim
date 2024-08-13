@@ -30,6 +30,12 @@ local options = {
     "rust",
     "toml",
     "dockerfile",
+    "python",
+    -- Go
+    "go",
+    "gomod",
+    "gosum",
+    "gowork",
   },
 
   highlight = {

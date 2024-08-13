@@ -2,7 +2,7 @@ return {
   {
     "tpope/vim-fugitive",
     lazy = false,
-    cmd = { "G", "Git", "Gdiff", "Gvdiff", "Gvdiffsplit" },
+    cmd = { "G", "Git", "Gdiff", "Gvdiff", "Gvdiffsplit", "Gmerge", "Grebase" },
   },
   -- {
   --   "sindrets/diffview.nvim",

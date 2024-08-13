@@ -20,7 +20,7 @@ local options = {
       gs.blame_line { full = true }
     end, opts "Blame full")
     map("n", "<leader>gl", gs.blame_line, opts "Blame line")
-    map("n", "<leader>gh", gs.preview_hunk_inline, opts "Preview hunk")
+    map("n", "<leader>ph", gs.preview_hunk_inline, opts "Preview hunk")
     -- map("n", "<leader>gd", gs.diffthis, opts "Buffer diff")
     map("n", "<leader>gr", gs.reset_hunk, opts "Reset hunk")
     map("n", "<leader>gs", gs.stage_hunk, opts "Stage hunk")

@@ -7,45 +7,45 @@ map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
 map("i", "<C-k>", "<Up>", { desc = "move up" })
 
-map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
-
 map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
 map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
 map("n", "<C-j>", "<C-w>j", { desc = "switch window down" })
 map("n", "<C-k>", "<C-w>k", { desc = "switch window up" })
 
-map("n", "<C-s>", "<cmd>w<CR>", { desc = "file save" })
-map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "file copy whole" })
+map("n", "<Esc>", "<cmd>noh<CR>", { desc = "General Clear highlights" })
 
-map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "toggle line number" })
-map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "toggle relative number" })
-map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "toggle nvcheatsheet" })
+map("n", "<C-s>", "<cmd>w<CR>", { desc = "General Save file" })
+map("n", "<C-c>", "<cmd>%y+<CR>", { desc = "General Copy whole file" })
+
+map("n", "<leader>n", "<cmd>set nu!<CR>", { desc = "Toggle line number" })
+map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "Toggle relative number" })
+map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "Toggle nvcheatsheet" })
 
 map("n", "<leader>fm", function()
   require("conform").format { lsp_fallback = true }
-end, { desc = "format files" })
+end, { desc = "General Format file" })
 
 -- global lsp mappings
-map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "lsp diagnostic loclist" })
+map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP Diagnostic loclist" })
 
 -- tabufline
-map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
+-- map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
 
-map("n", "<tab>", function()
-  require("nvchad.tabufline").next()
-end, { desc = "buffer goto next" })
-
-map("n", "<S-tab>", function()
-  require("nvchad.tabufline").prev()
-end, { desc = "buffer goto prev" })
+-- map("n", "<tab>", function()
+--   require("nvchad.tabufline").next()
+-- end, { desc = "buffer goto next" })
+--
+-- map("n", "<S-tab>", function()
+--   require("nvchad.tabufline").prev()
+-- end, { desc = "buffer goto prev" })
 
 -- map("n", "<leader>x", function()
 --   require("nvchad.tabufline").close_buffer()
 -- end, { desc = "buffer close" })
 
 -- Comment
-map("n", "<leader>/", "gcc", { desc = "comment toggle", remap = true })
-map("v", "<leader>/", "gc", { desc = "comment toggle", remap = true })
+map("n", "<leader>/", "gcc", { desc = "Toggle Comment", remap = true })
+map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
 
 -- nvimtree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })

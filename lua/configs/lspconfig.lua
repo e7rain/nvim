@@ -98,3 +98,87 @@ vim.g.rustaceanvim = {
   },
   dap = {},
 }
+
+-- Python
+
+require("lspconfig").basedpyright.setup {
+  on_attach = on_attach,
+  basedpyright = {
+    before_init = function(_, c)
+      if not c.settings then
+        c.settings = {}
+      end
+      if not c.settings.python then
+        c.settings.python = {}
+      end
+      c.settings.python.pythonPath = vim.fn.exepath "python"
+    end,
+    settings = {
+      basedpyright = {
+        analysis = {
+          typeCheckingMode = "basic",
+          autoImportCompletions = true,
+          diagnosticSeverityOverrides = {
+            reportUnusedImport = "information",
+            reportUnusedFunction = "information",
+            reportUnusedVariable = "information",
+            reportGeneralTypeIssues = "none",
+            reportOptionalMemberAccess = "none",
+            reportOptionalSubscript = "none",
+            reportPrivateImportUsage = "none",
+          },
+        },
+      },
+    },
+  },
+}
+
+-- Go
+
+require("lspconfig").gopls.setup {
+  on_attach = on_attach,
+  settings = {
+    gopls = {
+      analyses = {
+        ST1003 = true,
+        fieldalignment = false,
+        fillreturns = true,
+        nilness = true,
+        nonewvars = true,
+        shadow = true,
+        undeclaredname = true,
+        unreachable = true,
+        unusedparams = true,
+        unusedwrite = true,
+        useany = true,
+      },
+      codelenses = {
+        gc_details = true, -- Show a code lens toggling the display of gc's choices.
+        generate = true, -- show the `go generate` lens.
+        regenerate_cgo = true,
+        test = true,
+        tidy = true,
+        upgrade_dependency = true,
+        vendor = true,
+      },
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
+      buildFlags = { "-tags", "integration" },
+      completeUnimported = true,
+      diagnosticsDelay = "500ms",
+      gofumpt = true,
+      matcher = "Fuzzy",
+      semanticTokens = true,
+      staticcheck = true,
+      symbolMatcher = "fuzzy",
+      usePlaceholders = true,
+    },
+  },
+}
