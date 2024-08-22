@@ -11,7 +11,7 @@ return {
   { import = "plugins.specs.trouble" },
   { import = "plugins.specs.smart-split" },
   { import = "plugins.specs.typescript-tools" },
-  { import = "plugins.specs.kulala" },
+  -- { import = "plugins.specs.kulala" },
   { import = "plugins.specs.markdown" },
   { import = "plugins.specs.hurl" },
   { import = "plugins.specs.python" },
@@ -19,6 +19,35 @@ return {
   { import = "plugins.specs.oil" },
   { import = "plugins.specs.surround" },
   { import = "plugins.specs.zenmode" },
+  { import = "plugins.specs.rest" },
+  -- { import = "plugins.specs.mini" },
+  {
+    lazy = false,
+    "Chaitanyabsprip/fastaction.nvim",
+    ---@type FastActionConfig
+    opts = {
+      dismiss_keys = { "j", "k", "<c-c>", "q" },
+      override_function = function(_) end,
+      keys = "qwertyuiopasdfghlzxcvbnm",
+      popup = {
+        border = "rounded",
+        hide_cursor = true,
+        highlight = {
+          divider = "FloatBorder",
+          key = "MoreMsg",
+          title = "Title",
+          window = "NormalFloat",
+        },
+        title = "Code actions: ",
+      },
+      register_ui_select = false,
+    },
+    config = function(_, opts)
+      vim.keymap.set("n", "<leader>a", '<cmd>lua require("fastaction").code_action()<CR>', {})
+      vim.keymap.set("v", "<leader>a", "<esc><cmd>lua require('fastaction').range_code_action()<CR>", {})
+      require("fastaction").setup(opts)
+    end,
+  },
   {
     lazy = false,
     "echasnovski/mini.bufremove",
@@ -89,6 +118,7 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+
       -- "nvim-telescope/telescope-file-browser.nvim",
     },
     opts = function()

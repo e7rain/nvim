@@ -5,8 +5,8 @@
 local M = {}
 
 M.ui = {
-  theme = "rosepine",
-  theme_toggle = { "rosepine", "rosepine" },
+  theme = "flexoki-light",
+  theme_toggle = { "flexoki-light", "flexoki-light" },
   tabufline = {
     enabled = false,
   },
@@ -34,7 +34,7 @@ M.ui = {
     Boolean = { bold = true },
     Comment = { italic = true },
     ["@comment"] = { italic = true },
-    ["@string"] = { italic = true },
+    -- ["@string"] = { italic = true },
     ["@variable.builtin"] = { italic = true },
   },
 }

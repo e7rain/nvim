@@ -45,7 +45,7 @@ return {
           inlay = {
             loading = "⏳",
             done = "✅",
-            error = "✗",
+            error = "💣",
           },
           lualine = "🐼",
         },

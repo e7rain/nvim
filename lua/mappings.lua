@@ -7,7 +7,6 @@ local wk = require "which-key"
 wk.add {
   { "<leader>g", group = "git" }, -- group
   { "<leader>gg", "<cmd>Git<cr>", { desc = "Git", mode = "n" } },
-  { "-", "<cmd>Oil<cr>", { desc = "Oil", mode = "n" } },
 }
 
 wk.add {

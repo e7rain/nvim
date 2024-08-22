@@ -21,7 +21,7 @@ M.on_attach = function(_, bufnr)
   map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
 
   map("n", "<leader>lr", function()
-    require "nvchad.lsp.renamer" ()
+    require "nvchad.lsp.renamer"()
   end, opts "Rename current symbol")
 
   map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts "LSP Code action")
@@ -36,6 +36,12 @@ M.on_init = function(client, _)
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
+
+-- Ufo
+-- M.capabilities.textDocument.foldingRange = {
+--   dynamicRegistration = false,
+--   lineFoldingOnly = true,
+-- }
 
 M.capabilities.textDocument.completion.completionItem = {
   documentationFormat = { "markdown", "plaintext" },

@@ -1,15 +1,15 @@
 return {
   {
+    lazy = false,
     "stevearc/oil.nvim",
-    cmd = { "Oil" },
-    lazy = true,
-    opts = {},
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {},
     config = function()
       require("oil").setup {
-        default_file_explorer = true,
-        delete_to_trash = true,
-        skip_confirm_for_simple_edits = true,
+        columns = { "icon" },
+        float = {
+          border = "solid",
+        },
         view_options = {
           show_hidden = true,
           natural_order = true,
@@ -17,17 +17,12 @@ return {
             return name == ".." or name == ".git"
           end,
         },
-        float = {
-          padding = 2,
-          max_width = 90,
-          max_height = 0,
-        },
+        skip_confirm_for_simple_edits = true,
         win_options = {
           wrap = true,
           winblend = 0,
         },
         keymaps = {
-
           ["<C-c>"] = false,
           ["g?"] = "actions.show_help",
           ["<CR>"] = "actions.select",
@@ -35,19 +30,15 @@ return {
           ["<C-x>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
           ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
           ["<C-p>"] = "actions.preview",
-          ["<C-l>"] = "actions.refresh",
           ["-"] = "actions.parent",
           ["_"] = "actions.open_cwd",
-          ["`"] = "actions.cd",
-          ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
-          ["gs"] = "actions.change_sort",
-          ["gx"] = "actions.open_external",
-          ["g."] = "actions.toggle_hidden",
-          ["g\\"] = "actions.toggle_trash",
           ["q"] = "actions.close",
         },
         use_default_keymaps = false,
       }
+
+      vim.keymap.set("n", "-", "<cmd>Oil --float<cr>", { desc = "Open parent directory" })
+      vim.keymap.set("n", "<leader>-", require("oil").toggle_float)
     end,
   },
 }

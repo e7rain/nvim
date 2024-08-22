@@ -105,7 +105,7 @@ return {
       {
         -- snippet plugin
         "L3MON4D3/LuaSnip",
-        dependencies = "rafamadriz/friendly-snippets",
+        dependencies = { "rafamadriz/friendly-snippets", { "andersevenrud/cmp-tmux", lazy = true } },
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
           require("luasnip").config.set_config(opts)
