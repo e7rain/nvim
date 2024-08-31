@@ -12,6 +12,7 @@ conform.setup {
   formatters_by_ft = {
     lua = { "stylua" },
     css = { "prettierd" },
+    json = { "prettierd" },
     html = { "prettierd" },
     typescript = { "prettierd" },
     javascript = { "prettierd" },

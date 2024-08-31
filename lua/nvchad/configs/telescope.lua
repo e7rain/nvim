@@ -16,10 +16,13 @@ local options = {
     },
     mappings = {
       n = { ["q"] = require("telescope.actions").close },
+      i = {
+        ["<C-s>"] = require("telescope.actions").select_vertical,
+      },
     },
   },
 
-  extensions_list = { "themes", "terms" },
+  extensions_list = { "themes", "terms", "rest" },
   extensions = {},
 }
 

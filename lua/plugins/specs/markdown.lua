@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     local wk = require "which-key"
     wk.add {
-      { "<leader>mp", "<Cmd>Markview<CR>", desc = "Markdown toggle preview", mode = "n", buffer = true },
+      { "<leader>um", "<Cmd>Markview<CR>", desc = "Toggle markdown view", mode = "n", buffer = true },
     }
   end,
 })

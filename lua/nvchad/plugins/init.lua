@@ -11,9 +11,6 @@ return {
   {
     "NvChad/ui",
     lazy = false,
-    build = function()
-      dofile(vim.fn.stdpath "data" .. "/lazy/ui/lua/nvchad_feedback.lua")()
-    end,
   },
 
   {
@@ -43,13 +40,13 @@ return {
   },
 
   -- file managing , picker etc
-  {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    opts = function()
-      return require "nvchad.configs.nvimtree"
-    end,
-  },
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+  --   opts = function()
+  --     return require "nvchad.configs.nvimtree"
+  --   end,
+  -- },
 
   {
     "folke/which-key.nvim",
@@ -105,7 +102,9 @@ return {
       {
         -- snippet plugin
         "L3MON4D3/LuaSnip",
-        dependencies = { "rafamadriz/friendly-snippets", { "andersevenrud/cmp-tmux", lazy = true } },
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+        },
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
           require("luasnip").config.set_config(opts)
@@ -136,6 +135,69 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
+        "andersevenrud/cmp-tmux",
+        -- {
+        --
+        --   "tzachar/cmp-tabnine",
+        --   build = "./install.sh",
+        --   config = function()
+        --     local tabnine = require "cmp_tabnine.config"
+        --     tabnine:setup {
+        --       max_lines = 1000,
+        --       max_num_results = 5,
+        --       sort = true,
+        --       run_on_every_keystroke = true,
+        --       snippet_placeholder = "..",
+        --       ignored_file_types = {
+        --         -- default is not to ignore
+        --         -- uncomment to ignore in lua:
+        --         -- lua = true
+        --       },
+        --       show_prediction_strength = false,
+        --       min_percent = 0,
+        --     }
+        --   end,
+        -- },
+        {
+          "tzachar/cmp-ai",
+          dependencies = "nvim-lua/plenary.nvim",
+          config = function()
+            local cmp_ai = require "cmp_ai.config"
+
+            cmp_ai:setup {
+              max_lines = 100,
+              provider = "Ollama",
+              provider_options = {
+                model = "starcoder2:3b",
+                prompt = function(lines_before, lines_after)
+                  return "<fim_prefix>" .. lines_before .. "<fim_suffix>" .. lines_after .. "<fim_middle>"
+                end,
+                -- num_predict = 128,
+                -- temperature = 0,
+                -- top_p = 0.9,
+                -- stop = {
+                --   "<file_sep>",
+                -- },
+              },
+              -- provider_options = {
+              --   model = "codegemma:2b-code",
+              --   prompt = function(lines_before, lines_after)
+              --     return "<|fim_prefix|>" .. lines_before .. "<|fim_suffix|>" .. lines_after .. "<|fim_middle|>"
+              --   end,
+              --   num_predict = 128,
+              --   temperature = 0,
+              --   top_p = 0.9,
+              --   stop = { "<|file_separator|>" },
+              -- },
+              notify = true,
+              debounce_delay = 600,
+              notify_callback = function(msg)
+                vim.notify(msg)
+              end,
+              run_on_every_keystroke = true,
+            }
+          end,
+        },
       },
     },
     opts = function()

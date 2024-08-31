@@ -8,6 +8,8 @@ vim.api.nvim_create_autocmd("FileType", {
     wk.add {
       { "<leader>rr", k.run, desc = "󱂛  Request run", mode = "n", buffer = true },
       { "<leader>rc", k.copy, desc = "󱂛  Copy request", mode = "n", buffer = true },
+      { "<leader>rp", k.from_curl, desc = "󱂛  Paste from curl", mode = "n", buffer = true },
+      { "<leader>ri", k.inspect, desc = "󱂛  Inspect", mode = "n", buffer = true },
       { "[r", k.jump_prev, desc = "󱂛  jump prev", mode = "n", buffer = true },
       { "]r", k.jump_next, desc = "󱂛  jump next", mode = "n", buffer = true },
     }
@@ -51,6 +53,7 @@ return {
         },
         -- additional_curl_options = { "-A", "Mozilla/5.0" },
         winbar = false,
+        treesitter = true,
       }
     end,
   },

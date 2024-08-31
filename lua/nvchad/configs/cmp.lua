@@ -119,8 +119,19 @@ local options = {
         fallback()
       end
     end, { "i", "s" }),
+    ["<C-x>"] = cmp.mapping(
+      cmp.mapping.complete {
+        config = {
+          sources = cmp.config.sources {
+            { name = "cmp_ai" },
+          },
+        },
+      },
+      { "i" }
+    ),
   },
   sources = {
+    -- { name = "cmp_tabnine" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "buffer" },

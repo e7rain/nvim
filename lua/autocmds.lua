@@ -13,18 +13,9 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "json",
+  pattern = { "json", "html" },
   callback = function(ev)
-    vim.bo[ev.buf].formatprg = "jq"
-    -- vim.bo[ev.buf].formatexpr = "v:lua.require'conform'.formatexpr()"
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "html",
-  callback = function(ev)
-    vim.bo[ev.buf].formatprg = "prettier --parser"
-    -- vim.bo[ev.buf].formatexpr = "v:lua.require'conform'.formatexpr()"
+    vim.bo[ev.buf].formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
 })
 
@@ -32,6 +23,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "checkhealth",
     "fugitive*",
+    "flow-*",
     "kulala*",
     "rest_nvim_result*",
     "*rest-nvim.log*",

@@ -16,67 +16,65 @@ return {
           "rcarriga/nvim-dap-ui",
           dependencies = { "nvim-neotest/nvim-nio" },
           opts = {},
+          config = function(_, opts)
+            local dap = require "dap"
+            local dapui = require "dapui"
+
+            opts.layouts = {
+              {
+                elements = {
+                  {
+                    id = "scopes",
+                    size = 0.25,
+                  },
+                  {
+                    id = "breakpoints",
+                    size = 0.25,
+                  },
+                  -- {
+                  --   id = "stacks",
+                  --   size = 0.25,
+                  -- },
+                  {
+                    id = "watches",
+                    size = 0.50,
+                  },
+                },
+                position = "left",
+                size = 30,
+              },
+              -- {
+              --   elements = {
+              --     {
+              --       id = "repl",
+              --       size = 0.5,
+              --     },
+              --     {
+              --       id = "console",
+              --       size = 0.5,
+              --     },
+              --   },
+              --   position = "bottom",
+              --   size = 10,
+              -- },
+            }
+            dapui.setup(opts)
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+              dapui.open {}
+            end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+              dapui.close {}
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+              dapui.close {}
+            end
+          end,
+        },
           -- stylua: ignore
           keys = {
             { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
             { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
-        },
-        },
-        config = function(_, opts)
-          local dap = require "dap"
-          local dapui = require "dapui"
-
-          opts.layouts = {
-            {
-              elements = {
-                {
-                  id = "scopes",
-                  size = 0.25,
-                },
-                {
-                  id = "breakpoints",
-                  size = 0.25,
-                },
-                -- {
-                --   id = "stacks",
-                --   size = 0.25,
-                -- },
-                {
-                  id = "watches",
-                  size = 0.50,
-                },
-              },
-              position = "left",
-              size = 30,
-            },
-            -- {
-            --   elements = {
-            --     {
-            --       id = "repl",
-            --       size = 0.5,
-            --     },
-            --     {
-            --       id = "console",
-            --       size = 0.5,
-            --     },
-            --   },
-            --   position = "bottom",
-            --   size = 10,
-            -- },
-          }
-
-          dapui.setup(opts)
-          dap.listeners.after.event_initialized["dapui_config"] = function()
-            -- vim.cmd [[ :NvimTreeClose ]]
-            dapui.open {}
-          end
-          dap.listeners.before.event_terminated["dapui_config"] = function()
-            dapui.close {}
-          end
-          dap.listeners.before.event_exited["dapui_config"] = function()
-            dapui.close {}
-          end
-        end,
+          },
       },
       {
         "theHamsta/nvim-dap-virtual-text",
@@ -109,7 +107,6 @@ return {
   },
   {
     "rcarriga/cmp-dap",
-    lazy = true,
     dependencies = { "hrsh7th/nvim-cmp" },
     config = function()
       require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {

@@ -39,12 +39,11 @@ M.ui = {
   },
 }
 
-M.lsp = {
-  signature = true,
-}
+-- M.lsp = {
+--   signature = true,
+-- }
 
 M.base46 = {
-  -- transparency = true,
   integrations = {
     "cmp",
     "git",

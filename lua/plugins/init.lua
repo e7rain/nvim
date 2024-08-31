@@ -11,16 +11,34 @@ return {
   { import = "plugins.specs.trouble" },
   { import = "plugins.specs.smart-split" },
   { import = "plugins.specs.typescript-tools" },
-  -- { import = "plugins.specs.kulala" },
   { import = "plugins.specs.markdown" },
-  { import = "plugins.specs.hurl" },
   { import = "plugins.specs.python" },
   { import = "plugins.specs.diffview" },
-  { import = "plugins.specs.oil" },
   { import = "plugins.specs.surround" },
   { import = "plugins.specs.zenmode" },
   { import = "plugins.specs.rest" },
-  -- { import = "plugins.specs.mini" },
+  { import = "plugins.specs.mini" },
+  {
+    event = "VeryLazy",
+    "j-hui/fidget.nvim",
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    opts = {
+      lsp = {
+        signature = {
+          enabled = false,
+        },
+      },
+      cmdline = {
+        view = "cmdline", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+      },
+    },
+  },
   {
     lazy = false,
     "Chaitanyabsprip/fastaction.nvim",
@@ -67,6 +85,12 @@ return {
       require "configs.conform"
     end,
   },
+  -- {
+  --   "utilyre/barbecue.nvim",
+  --   event = "LspAttach",
+  --   dependencies = { "SmiteshP/nvim-navic" },
+  --   opts = {},
+  -- },
 
   -- These are some examples, uncomment them if you want to see them work!
   {
