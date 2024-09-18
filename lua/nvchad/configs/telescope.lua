@@ -22,7 +22,7 @@ local options = {
     },
   },
 
-  extensions_list = { "themes", "terms", "rest" },
+  extensions_list = { "themes", "terms", "rest", "projects" },
   extensions = {},
 }
 

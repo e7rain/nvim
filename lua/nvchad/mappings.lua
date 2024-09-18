@@ -64,6 +64,7 @@ map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git 
 map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
 map("n", "<leader>th", "<cmd>Telescope themes<CR>", { desc = "telescope nvchad themes" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
+map("n", "<leader>fp", "<cmd>Telescope projects<cr>", { desc = "Projects" })
 map(
   "n",
   "<leader>fa",
@@ -90,7 +91,7 @@ end, { desc = "terminal toggleable vertical term" })
 
 map({ "n", "t" }, "<A-h>", function()
   require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
-end, { desc = "terminal new horizontal term" })
+end, { desc = "terminal toggleable horizontal term" })
 
 map({ "n", "t" }, "<A-i>", function()
   require("nvchad.term").toggle { pos = "float", id = "floatTerm" }

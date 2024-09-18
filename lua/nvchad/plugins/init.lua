@@ -84,6 +84,22 @@ return {
     opts = function()
       return require "nvchad.configs.mason"
     end,
+    config = function(_, opts)
+      if opts.ensure_installed then
+        vim.api.nvim_echo({
+          { "\n   ensure_installed has been removed! use M.mason.pkgs table in your chadrc.\n", "WarningMsg" },
+          { "   https://github.com/NvChad/ui/blob/v2.5/lua/nvconfig.lua#L85 \n\n", "FloatBorder" },
+          {
+            "   MasonInstallAll will automatically install all mason packages of tools configured in your plugins. \n",
+            "healthSuccess",
+          },
+          { "   Currently supported plugins are : lspconfig, nvim-lint, conform. \n", "Added" },
+          { "   So dont add them in your chadrc as MasonInstallAll automatically installs them! \n", "Changed" },
+        }, false, {})
+      end
+
+      require("mason").setup(opts)
+    end,
   },
 
   {
@@ -135,69 +151,48 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
+        -- "hrsh7th/cmp-cmdline",
         "andersevenrud/cmp-tmux",
         -- {
-        --
-        --   "tzachar/cmp-tabnine",
-        --   build = "./install.sh",
+        --   "tzachar/cmp-ai",
+        --   dependencies = "nvim-lua/plenary.nvim",
         --   config = function()
-        --     local tabnine = require "cmp_tabnine.config"
-        --     tabnine:setup {
-        --       max_lines = 1000,
-        --       max_num_results = 5,
-        --       sort = true,
-        --       run_on_every_keystroke = true,
-        --       snippet_placeholder = "..",
-        --       ignored_file_types = {
-        --         -- default is not to ignore
-        --         -- uncomment to ignore in lua:
-        --         -- lua = true
+        --     local cmp_ai = require "cmp_ai.config"
+        --
+        --     cmp_ai:setup {
+        --       max_lines = 100,
+        --       provider = "Ollama",
+        --       provider_options = {
+        --         model = "starcoder2:3b",
+        --         prompt = function(lines_before, lines_after)
+        --           return "<fim_prefix>" .. lines_before .. "<fim_suffix>" .. lines_after .. "<fim_middle>"
+        --         end,
+        --         -- num_predict = 128,
+        --         -- temperature = 0,
+        --         -- top_p = 0.9,
+        --         -- stop = {
+        --         --   "<file_sep>",
+        --         -- },
         --       },
-        --       show_prediction_strength = false,
-        --       min_percent = 0,
+        --       -- provider_options = {
+        --       --   model = "codegemma:2b-code",
+        --       --   prompt = function(lines_before, lines_after)
+        --       --     return "<|fim_prefix|>" .. lines_before .. "<|fim_suffix|>" .. lines_after .. "<|fim_middle|>"
+        --       --   end,
+        --       --   num_predict = 128,
+        --       --   temperature = 0,
+        --       --   top_p = 0.9,
+        --       --   stop = { "<|file_separator|>" },
+        --       -- },
+        --       notify = true,
+        --       debounce_delay = 600,
+        --       notify_callback = function(msg)
+        --         vim.notify(msg)
+        --       end,
+        --       run_on_every_keystroke = true,
         --     }
         --   end,
         -- },
-        {
-          "tzachar/cmp-ai",
-          dependencies = "nvim-lua/plenary.nvim",
-          config = function()
-            local cmp_ai = require "cmp_ai.config"
-
-            cmp_ai:setup {
-              max_lines = 100,
-              provider = "Ollama",
-              provider_options = {
-                model = "starcoder2:3b",
-                prompt = function(lines_before, lines_after)
-                  return "<fim_prefix>" .. lines_before .. "<fim_suffix>" .. lines_after .. "<fim_middle>"
-                end,
-                -- num_predict = 128,
-                -- temperature = 0,
-                -- top_p = 0.9,
-                -- stop = {
-                --   "<file_sep>",
-                -- },
-              },
-              -- provider_options = {
-              --   model = "codegemma:2b-code",
-              --   prompt = function(lines_before, lines_after)
-              --     return "<|fim_prefix|>" .. lines_before .. "<|fim_suffix|>" .. lines_after .. "<|fim_middle|>"
-              --   end,
-              --   num_predict = 128,
-              --   temperature = 0,
-              --   top_p = 0.9,
-              --   stop = { "<|file_separator|>" },
-              -- },
-              notify = true,
-              debounce_delay = 600,
-              notify_callback = function(msg)
-                vim.notify(msg)
-              end,
-              run_on_every_keystroke = true,
-            }
-          end,
-        },
       },
     },
     opts = function()
@@ -254,6 +249,10 @@ return {
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
     end,
-    dependencies = { { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true } },
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+      },
+    },
   },
 }

@@ -1,8 +1,7 @@
 return {
   {
-    lazy = false,
     "echasnovski/mini.files",
-    version = false,
+    event = "VeryLazy",
     config = function()
       local files = require "mini.files"
       files.setup {
@@ -108,6 +107,74 @@ return {
         toggle()
         files.reveal_cwd()
       end, { desc = "Open directory" })
+    end,
+  },
+  {
+    "echasnovski/mini.ai",
+    event = "VeryLazy",
+    opts = function()
+      local gen_spec = require("mini.ai").gen_spec
+
+      return {
+        custom_textobjects = {
+          a = gen_spec.argument {
+            brackets = { "%b()", "%b[]", "%b{}", "%b<>", "%b||" },
+            separators = "%s*[,;]%s*",
+          },
+          c = gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+          f = gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
+          o = gen_spec.treesitter({
+            a = { "@block.outer", "@loop.outer", "@conditional.outer" },
+            i = { "@block.inner", "@loop.inner", "@conditional.inner" },
+          }, {}),
+          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^.->().*()</[^/]->$" },
+        },
+        n_lines = 500,
+        -- search_method = "cover",
+      }
+    end,
+    config = function(_, opts)
+      require("mini.ai").setup(opts)
+
+      -- Register mini.ai keys in which-key
+      local i = {
+        [" "] = "Whitespace",
+        ['"'] = 'Balanced "',
+        ["'"] = "Balanced '",
+        ["`"] = "Balanced `",
+        ["("] = "Balanced (",
+        ["["] = "Balanced [",
+        ["{"] = "Balanced {",
+        ["<lt>"] = "Balanced <",
+        [")"] = "Balanced ) including white-space",
+        ["}"] = "Balanced } including white-space",
+        ["]"] = "Balanced ] including white-space",
+        [">"] = "Balanced > including white-space",
+        ["?"] = "User Prompt",
+        _ = "Underscope",
+        a = "Argument",
+        b = "Balanced ) ] }",
+        c = "Class",
+        f = "Function",
+        o = "Block, conditional, loop",
+        q = "Quote `, \", '",
+        t = "Tag",
+      }
+
+      local a = vim.deepcopy(i)
+      for k, v in pairs(a) do
+        a[k] = v:gsub(" including.*", "")
+      end
+
+      local ic = vim.deepcopy(i)
+      local ac = vim.deepcopy(a)
+
+      for key, name in pairs { n = "Next", l = "Last" } do
+        i[key] = vim.tbl_extend("force", { name = "Inside " .. name .. " textobject" }, ic)
+        a[key] = vim.tbl_extend("force", { name = "Around " .. name .. " textobject" }, ac)
+      end
+
+      -- require("which-key").register(i, { mode = { "o", "x" }, i = i, a = a })
     end,
   },
 }

@@ -23,3 +23,12 @@ vim.filetype.add {
 }
 
 vim.opt.guifont = "Intel One Mono:w11:b:i, Symbols Nerd Font, Noto Color Emoji"
+
+-- Folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldcolumn = "auto:9"
+-- vim.opt.foldtext = ""
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldnestmax = 4

@@ -101,10 +101,13 @@ local options = {
       end
     end, { "i", "s" }),
     ["<Tab>"] = cmp.mapping(function(fallback)
+      local supermaven_preview = require "supermaven-nvim.completion_preview"
       if cmp.visible() then
         cmp.select_next_item()
       elseif require("luasnip").expand_or_jumpable() then
         require("luasnip").expand_or_jump()
+      elseif supermaven_preview.has_suggestion() then
+        supermaven_preview.on_accept_suggestion()
       else
         fallback()
       end
@@ -119,22 +122,22 @@ local options = {
         fallback()
       end
     end, { "i", "s" }),
-    ["<C-x>"] = cmp.mapping(
-      cmp.mapping.complete {
-        config = {
-          sources = cmp.config.sources {
-            { name = "cmp_ai" },
-          },
-        },
-      },
-      { "i" }
-    ),
   },
   sources = {
-    -- { name = "cmp_tabnine" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "buffer" },
+    {
+      name = "buffer",
+      option = {
+        get_bufnrs = function()
+          local bufs = {}
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            bufs[vim.api.nvim_win_get_buf(win)] = true
+          end
+          return vim.tbl_keys(bufs)
+        end,
+      },
+    },
     { name = "nvim_lua" },
     { name = "path" },
     { name = "tmux" },
@@ -144,5 +147,28 @@ local options = {
 if cmp_style ~= "atom" and cmp_style ~= "atom_colored" then
   options.window.completion.border = border "CmpBorder"
 end
+
+-- `/` cmdline setup.
+-- cmp.setup.cmdline("/", {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     { name = "buffer" },
+--   },
+-- })
+
+-- `:` cmdline setup.
+-- cmp.setup.cmdline(":", {
+--   mapping = mapping,
+--   sources = cmp.config.sources({
+--     { name = "path" },
+--   }, {
+--     {
+--       name = "cmdline",
+--       option = {
+--         -- ignore_cmds = { "Man", "!" },
+--       },
+--     },
+--   }),
+-- })
 
 return options
