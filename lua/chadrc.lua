@@ -5,8 +5,6 @@
 local M = {}
 
 M.ui = {
-  theme = "gruvchad",
-  theme_toggle = { "gruvchad", "gruvchad" },
   tabufline = {
     enabled = false,
   },
@@ -61,36 +59,18 @@ M.ui = {
       end,
     },
   },
+  telescope = {
+    style = "borderless",
+  },
   cmp = {
     style = "flat_dark",
   },
-  hl_add = {
-    FlashLabel = {
-      bg = "baby_pink",
-      bold = true,
-      italic = true,
-      fg = "darker_black",
-    },
-    DiffviewFilePanelSelected = { bg = "yellow", fg = "darker_black" },
-  },
-  hl_override = {
-    DiffChangeDelete = { bg = "red", fg = "grey" },
-    DiffText = { bg = "yellow", fg = "grey" },
-    DiffAdd = { bg = "green", fg = "grey" },
-    DiffDelete = { bg = "red", fg = "grey" },
-    Boolean = { bold = true },
-    Comment = { italic = true },
-    ["@comment"] = { italic = true },
-    -- ["@string"] = { italic = true },
-    ["@variable.builtin"] = { italic = true },
-    ["@keyword"] = { italic = true },
-  },
 }
 
--- M.lsp = {
---   signature = true,
--- }
---
+M.colorify = {
+  enabled = true,
+}
+
 M.mason = {
   pkgs = {
     -- "typescript-language-server",
@@ -125,8 +105,38 @@ M.mason = {
   },
 }
 
+M.lsp = {
+  signature = true,
+}
+
 M.base46 = {
+  theme = "melange",
+  hl_add = {
+    FlashLabel = {
+      bg = "baby_pink",
+      bold = true,
+      italic = true,
+      fg = "darker_black",
+    },
+    DiffviewFilePanelSelected = { bg = "yellow", fg = "darker_black" },
+  },
+  hl_override = {
+    DiffChangeDelete = { bg = "red", fg = "grey" },
+    DiffText = { bg = "yellow", fg = "grey" },
+    DiffAdd = { bg = "green", fg = "grey" },
+    DiffDelete = { bg = "red", fg = "grey" },
+    Boolean = { bold = true },
+    Comment = { italic = true },
+    ["@comment"] = { italic = true },
+    -- ["@string"] = { italic = true },
+    ["@variable.builtin"] = { italic = true },
+    ["@keyword"] = { italic = true },
+  },
   integrations = {
+    "telescope",
+    "blankline",
+    "whichkey",
+    "lsp",
     "cmp",
     "git",
     "treesitter",

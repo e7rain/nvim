@@ -62,7 +62,7 @@ map("n", "<leader>gd", "<cmd>Gvdiffsplit<cr>", { desc = "Git diff" })
 
 -- Disable mappings
 nomap("n", "<leader>rn")
-nomap("n", "<leader>cc")
+-- nomap("n", "<leader>cc")
 nomap("n", "<leader>ch")
 nomap("n", "<leader>cm")
 
