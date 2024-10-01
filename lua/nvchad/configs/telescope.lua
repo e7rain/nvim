@@ -1,6 +1,6 @@
 dofile(vim.g.base46_cache .. "telescope")
 
-local options = {
+return {
   defaults = {
     prompt_prefix = "   ",
     selection_caret = " ",
@@ -25,5 +25,3 @@ local options = {
   extensions_list = { "themes", "terms", "rest", "projects" },
   extensions = {},
 }
-
-return options

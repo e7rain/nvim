@@ -3,7 +3,7 @@ pcall(function()
   dofile(vim.g.base46_cache .. "treesitter")
 end)
 
-local options = {
+return {
   ensure_installed = {
     "lua",
     "luadoc",
@@ -111,5 +111,3 @@ local options = {
   --   },
   -- },
 }
-
-return options
