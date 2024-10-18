@@ -41,7 +41,7 @@ return {
           marker_minus = {
             add_padding = true,
 
-            text = "► ",
+            text = "■ ",
             hl = "MarkviewListItemMinus",
           },
           marker_plus = {
