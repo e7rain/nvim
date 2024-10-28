@@ -27,13 +27,3 @@ vim.api.nvim_create_autocmd("FileType", {
     }
   end,
 })
-
-return {
-  {
-    "rest-nvim/rest.nvim",
-    ft = "http",
-    -- config = function()
-    --   require("telescope").load_extension "rest"
-    -- end,
-  },
-}

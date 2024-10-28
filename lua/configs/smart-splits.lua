@@ -1,7 +1,4 @@
-local spec = {
-  "mrjones2014/smart-splits.nvim",
-  config = function()
-    require("smart-splits").setup {
+return {
       -- Ignored buffer types (only while resizing)
       ignored_buftypes = {
         "nofile",
@@ -90,12 +87,9 @@ local spec = {
       disable_multiplexer_nav_when_zoomed = true,
       -- Supply a Kitty remote control password if needed,
       -- or you can also set vim.g.smart_splits_kitty_password
-      -- see https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.remote_control_password
+    -- see https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.remote_control_password
       kitty_password = nil,
       -- default logging level, one of: 'trace'|'debug'|'info'|'warn'|'error'|'fatal'
       log_level = "info",
     }
-  end,
-}
 
-return spec
