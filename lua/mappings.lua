@@ -46,14 +46,11 @@ map("n", "<leader>fm", function()
   require("conform").format { lsp_fallback = true }
 end, { desc = "general format file" })
 
-map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
-map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
-
-map("t", "<esc>", "<C-\\><C-n>", { desc = "terminal escape terminal mode" })
-
 map("n", "<leader>gg", "<cmd>Git<cr>", { desc = "Git" })
-map("n", "<leader>gh", require("gitsigns").preview_hunk_inline, { desc = "preview hunk inline" })
+map("n", "<leader>gh", require("gitsigns").preview_hunk_inline, { desc = "Preview hunk" })
 map("n", "<leader>gd", "<cmd>Gvdiffsplit<cr>", { desc = "Git diff" })
+map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branches" })
+map("t", "<esc>", "<C-\\><C-n>", { desc = "terminal escape terminal mode" })
 
 map("n", "<leader>q", "<cmd>q!<cr>", { desc = "Quit window" })
 
@@ -70,10 +67,10 @@ map("n", "<leader>dB", function()
   require("dap").set_breakpoint(vim.fn.input "Breakpoint condition: ")
 end, { desc = "breakpoint condition" })
 
-map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle focus=true<cr>", { desc = "Diagnostics (Trouble)" })
+map("n", "<leader>X", "<cmd>Trouble diagnostics toggle focus=true<cr>", { desc = "Diagnostics (Trouble)" })
 map(
   "n",
-  "<leader>xx",
+  "<leader>x",
   "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>",
   { desc = "Diagnostics Buffer (Trouble)" }
 )
@@ -92,3 +89,17 @@ map("n", "<leader>xt", "<cmd>TodoTrouble<cr>", { desc = "Todo (Trouble)" })
 map({ "n", "x", "o" }, "s", require("flash").jump, { desc = "Flash" })
 map({ "n", "x", "o" }, "<leader>s", require("flash").treesitter, { desc = "Flash Treesitter" })
 map({ "x", "o" }, "r", require("flash").treesitter_search, { desc = "Flash Treesitter Search" })
+
+-- Neotest
+map("n", "<leader>tt", require("neotest").run.run, { desc = "Run test" })
+map("n", "<leader>td", function()
+  require("neotest").run.run { strategy = "dap" }
+end, { desc = "Debug test" })
+map("n", "<leader>tf", function()
+  require("neotest").run.run(vim.fn.expand "%")
+end, { desc = "Run all test file" })
+map("n", "<leader>ts", require("neotest").summary.toggle, { desc = "Summary test" })
+map("n", "<leader>tp", require("neotest").output.open, { desc = "Preview test" })
+map("n", "<leader>tP", require("neotest").output_panel.toggle, { desc = "Preview all test" })
+map("n", "[t", require("neotest").jump.prev, { desc = "Jump prev test" })
+map("n", "]t", require("neotest").jump.next, { desc = "Jump next test" })

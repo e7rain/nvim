@@ -49,6 +49,13 @@ M.base46 = {
     ["@keyword"] = { italic = true },
   },
   integrations = {
+    "cmp",
+    "markview",
+    "git",
+    "lsp",
+    "todo",
+    "mason",
+    "treesitter",
     "dap",
     "trouble",
   },

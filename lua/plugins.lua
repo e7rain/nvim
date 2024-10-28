@@ -18,8 +18,8 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "b0o/SchemaStore.nvim",
-      "yioneko/nvim-vtsls",
+      "b0o/SchemaStore.nvim", -- json schema store
+      "yioneko/nvim-vtsls", -- javascript utils
     },
     config = function()
       require "configs.lspconfig"
@@ -130,24 +130,8 @@ return {
         "supermaven-inc/supermaven-nvim",
         event = "VeryLazy",
         config = function()
-          require("supermaven-nvim").setup {
-            keymaps = {
-              accept_suggestion = "<C-]>",
-              clear_suggestion = "<C-a>",
-              accept_word = "<C-y>",
-            },
-            ignore_filetypes = { cpp = true }, -- or { "cpp", }
-            color = {
-              suggestion_color = "#ffffff",
-              cterm = 244,
-            },
-            log_level = "info", -- set to "off" to disable logging completely
-            -- disable_inline_completion = false, -- disables inline completion for use with cmp
-            disable_keymaps = false, -- disables built in keymaps for more manual control
-            condition = function()
-              return false
-            end, -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
-          }
+          local opts = require "configs.supermaven"
+          require("supermaven-nvim").setup(opts)
         end,
       },
     },
@@ -241,6 +225,7 @@ return {
 
   {
     "j-hui/fidget.nvim",
+    cmd = { "Fidget" },
     event = "VeryLazy",
   },
 
@@ -297,7 +282,7 @@ return {
     "ahmedkhalf/project.nvim",
     event = "VeryLazy",
     opts = {
-      manual_mode = true,
+      -- manual_mode = true,
       detection_methods = { "lsp", "pattern" },
       patterns = {
         ".git",
@@ -330,8 +315,8 @@ return {
   -- Rust
   {
     "mrcjkb/rustaceanvim",
+    event = "VeryLazy",
     version = "^5",
-    ft = { "rust" },
     config = function()
       require "configs.rustaceanvim"
     end,
@@ -348,6 +333,20 @@ return {
     config = function()
       local opts = require "configs.markview"
       require("markview").setup(opts)
+    end,
+  },
+
+  {
+    cmd = { "DiffviewOpen" },
+    "sindrets/diffview.nvim",
+    hooks = {
+      diff_buf_read = function(bufnr)
+        vim.b[bufnr].view_activated = false
+      end,
+    },
+    config = function()
+      local opts = require "configs.diffview"
+      require("diffview").setup(opts)
     end,
   },
 }
