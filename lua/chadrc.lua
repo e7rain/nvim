@@ -26,7 +26,7 @@ M.colorify = {
 }
 
 M.base46 = {
-  theme = "melange",
+  theme = "decay",
   hl_add = {
     FlashLabel = {
       bg = "baby_pink",

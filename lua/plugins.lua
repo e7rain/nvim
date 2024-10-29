@@ -217,6 +217,12 @@ return {
   },
 
   {
+    "stevearc/dressing.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+
+  {
     "Chaitanyabsprip/fastaction.nvim",
     opts = function()
       return require "configs.fastaction"

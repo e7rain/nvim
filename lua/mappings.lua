@@ -16,8 +16,12 @@ map("n", "<leader>c", function()
   require("mini.bufremove").delete()
 end, { desc = "Close buffer" })
 
+map("n", "<Tab>", "<cmd>bn<cr>", { desc = "next buffer" })
+map("n", "<S-Tab>", "<cmd>bp<cr>", { desc = "previous buffer" })
+
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "find files" })
+map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "live grep" })
 map(
   "n",
   "<leader>fa",
@@ -27,9 +31,7 @@ map(
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "find buffers" })
 map("n", "<leader>fp", "<cmd>Telescope projects<cr>", { desc = "find projects" })
 map("n", "<leader>ft", "<cmd>Telescope terms<CR>", { desc = "telescope show terms" })
-
-map("n", "<leader>uf", "<cmd>FormatToggle!<cr>", { desc = "autoformat toggle buffer" })
-map("n", "<leader>uF", "<cmd>FormatToggle<cr>", { desc = "autoformat toggle global" })
+map("n", "<leader>fw", "<cmd>Telescope grep_string word_to_search=true<cr>", { desc = "Find word in files" })
 
 -- resize windows
 map({ "n", "t" }, "<c-left>", require("smart-splits").resize_left)
@@ -103,3 +105,10 @@ map("n", "<leader>tp", require("neotest").output.open, { desc = "Preview test" }
 map("n", "<leader>tP", require("neotest").output_panel.toggle, { desc = "Preview all test" })
 map("n", "[t", require("neotest").jump.prev, { desc = "Jump prev test" })
 map("n", "]t", require("neotest").jump.next, { desc = "Jump next test" })
+
+map("n", "<leader>un", require("utils").number, { desc = "Toggle numbers" })
+map("n", "<leader>us", require("utils").spell, { desc = "Toggle spell" })
+map("n", "<leader>uw", require("utils").wrap, { desc = "Toggle wrap" })
+map("n", "<leader>up", require("utils").autopairs, { desc = "Toggle autopair" })
+map("n", "<leader>uf", "<cmd>FormatToggle!<cr>", { desc = "autoformat toggle buffer" })
+map("n", "<leader>uF", "<cmd>FormatToggle<cr>", { desc = "autoformat toggle global" })

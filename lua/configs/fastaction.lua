@@ -20,5 +20,5 @@ return {
     --   { pattern = "extract widget", key ="e", order = 3 },
     -- },
   },
-  register_ui_select = false,
+  -- register_ui_select = true,
 }

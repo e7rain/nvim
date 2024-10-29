@@ -147,3 +147,16 @@ require("lspconfig").cssls.setup {
   on_init = on_init,
   capabilities = capabilities,
 }
+
+require("lspconfig").clangd.setup {
+  on_init = on_init,
+  on_attach = on_attach,
+  capabilities = vim.tbl_extend("force", capabilities, {
+    offsetEncoding = { "utf-8", "utf-16" },
+    textDocument = {
+      completion = {
+        editsNearCursor = true,
+      },
+    },
+  }),
+}
