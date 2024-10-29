@@ -70,7 +70,7 @@ end, { desc = "breakpoint condition" })
 map("n", "<leader>X", "<cmd>Trouble diagnostics toggle focus=true<cr>", { desc = "Diagnostics (Trouble)" })
 map(
   "n",
-  "<leader>x",
+  "<leader>xx",
   "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>",
   { desc = "Diagnostics Buffer (Trouble)" }
 )

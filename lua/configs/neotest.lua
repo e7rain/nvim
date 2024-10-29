@@ -7,6 +7,13 @@ local opts = {
     -- require "neotest-python",
     require "rustaceanvim.neotest",
   },
+  -- status = { virtual_text = true },
+  -- output = { open_on_run = true },
+  quickfix = {
+    open = function()
+      require("trouble").open { mode = "quickfix", focus = true }
+    end,
+  },
 }
 
 local rustaceanvim_avail, rustaceanvim = pcall(require, "rustaceanvim.neotest")

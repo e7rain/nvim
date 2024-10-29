@@ -80,6 +80,9 @@ M.mason = {
     -- Web
     "html-lsp",
     "css-lsp",
+
+    -- Rust, C/C++
+    "codelldb",
   },
 }
 
