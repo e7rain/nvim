@@ -21,12 +21,16 @@ M.ui = {
   },
 }
 
+M.term = {
+  sizes = { sp = 0.3, vsp = 0.3, ["bo sp"] = 0.3, ["bo vsp"] = 0.3 },
+}
+
 M.colorify = {
   enabled = true,
 }
 
 M.base46 = {
-  theme = "decay",
+  theme = "gruvbox",
   hl_add = {
     FlashLabel = {
       bg = "baby_pink",
@@ -44,9 +48,10 @@ M.base46 = {
     Boolean = { bold = true },
     Comment = { italic = true },
     ["@comment"] = { italic = true },
-    -- ["@string"] = { italic = true },
+    ["@string"] = { italic = true },
     ["@variable.builtin"] = { italic = true },
     ["@keyword"] = { italic = true },
+    ["@tag.attribute"] = { italic = true },
   },
   integrations = {
     "cmp",
@@ -83,6 +88,9 @@ M.mason = {
 
     -- Rust, C/C++
     "codelldb",
+
+    -- Python
+    "basedpyright",
   },
 }
 

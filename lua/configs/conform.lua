@@ -35,6 +35,8 @@ return {
     html = { "prettierd" },
     typescript = { "prettierd" },
     javascript = { "prettierd" },
+    typescriptreact = { "prettierd" },
+    javascriptreact = { "prettierd" },
   },
   format_on_save = function(bufnr)
     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then

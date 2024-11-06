@@ -16,8 +16,9 @@ map("n", "<leader>c", function()
   require("mini.bufremove").delete()
 end, { desc = "Close buffer" })
 
-map("n", "<Tab>", "<cmd>bn<cr>", { desc = "next buffer" })
-map("n", "<S-Tab>", "<cmd>bp<cr>", { desc = "previous buffer" })
+map({ "n", "t" }, "<c-space>", function()
+  require("nvchad.term").toggle { pos = "sp", id = "horizontalTerm" }
+end)
 
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "find files" })
@@ -49,7 +50,7 @@ map("n", "<leader>fm", function()
 end, { desc = "general format file" })
 
 map("n", "<leader>gg", "<cmd>Git<cr>", { desc = "Git" })
-map("n", "<leader>gh", require("gitsigns").preview_hunk_inline, { desc = "Preview hunk" })
+map("n", "<leader>hh", require("gitsigns").preview_hunk_inline, { desc = "Preview hunk" })
 map("n", "<leader>gd", "<cmd>Gvdiffsplit<cr>", { desc = "Git diff" })
 map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", { desc = "Git branches" })
 map("t", "<esc>", "<C-\\><C-n>", { desc = "terminal escape terminal mode" })

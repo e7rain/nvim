@@ -44,6 +44,16 @@ dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close {}
 end
 
+dap.adapters.codelldb = {
+  name = "codelldb",
+  type = "server",
+  port = "${port}",
+  executable = {
+    command = vim.fn.stdpath "data" .. "/mason/bin/codelldb",
+    args = { "--port", "${port}" },
+  },
+}
+
 dap.adapters["chrome"] = {
   type = "executable",
   command = vim.fn.exepath "chrome-debug-adapter",
@@ -150,6 +160,23 @@ local config_js_debug = {
   --   cwd = "${workspaceFolder}",
   -- },
 }
+
+dap.configurations.c = {
+  {
+    name = "Launch",
+    type = "codelldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+    end,
+    cwd = "${workspaceFolder}",
+    stopOnEntry = false,
+    args = {},
+    runInTerminal = true,
+  },
+}
+
+dap.configurations.cpp = dap.configurations.c
 
 for _, filetype in pairs { "javascript", "typescript" } do
   dap.configurations[filetype] = vim.list_extend(dap.configurations[filetype] or {}, config_js_debug)

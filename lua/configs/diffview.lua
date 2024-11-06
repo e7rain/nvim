@@ -1,3 +1,4 @@
+dofile(vim.g.base46_cache .. "diffview")
 local actions = require "diffview.actions"
 
 return {
