@@ -1,6 +1,25 @@
 return {
   "nvim-lua/plenary.nvim",
   {
+    cmd = "Treewalker",
+    "aaronik/treewalker.nvim",
+
+    -- The following options are the defaults.
+    -- Treewalker aims for sane defaults, so these are each individually optional,
+    -- and setup() does not need to be called, so the whole opts block is optional as well.
+    opts = {
+      -- Whether to briefly highlight the node after jumping to it
+      highlight = true,
+
+      -- How long should above highlight last (in ms)
+      highlight_duration = 500,
+
+      -- The color of the above highlight. Must be a valid vim highlight group.
+      -- (see :h highlight-group for options)
+      highlight_group = "CursorLine",
+    },
+  },
+  {
     "nvchad/ui",
     config = function()
       require "nvchad"
@@ -13,6 +32,10 @@ return {
     end,
   },
   "nvchad/volt", -- optional, needed for theme switcher
+  {
+    "nvzone/minty",
+    cmd = { "Shades", "Huefy" },
+  },
 
   {
     "neovim/nvim-lspconfig",
@@ -28,6 +51,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
     event = { "BufReadPost", "BufNewFile" },
     config = function()
       local opts = require "configs.treesitter"
@@ -166,7 +190,7 @@ return {
 
   {
     "tpope/vim-fugitive",
-    cmd = { "Git", "G", "Gvdiffsplit" },
+    cmd = { "Git", "G", "Gvdiffsplit", "Gedit" },
   },
 
   {
@@ -183,9 +207,27 @@ return {
     dependencies = {
       {
         {
-          "rcarriga/nvim-dap-ui",
-          dependencies = { "nvim-neotest/nvim-nio" },
+          "igorlfs/nvim-dap-view",
+          opts = {
+            winbar = {
+              show = true,
+              sections = { "watches", "exceptions", "breakpoints", "threads", "repl" },
+              default_section = "breakpoints",
+            },
+            windows = {
+              height = 12,
+              terminal = {
+                position = "left",
+                hide = { "pwa-node" },
+                start_hidden = false,
+              },
+            },
+          },
         },
+        -- {
+        --   "rcarriga/nvim-dap-ui",
+        --   dependencies = { "nvim-neotest/nvim-nio" },
+        -- },
       },
       {
         "theHamsta/nvim-dap-virtual-text",
@@ -198,7 +240,17 @@ return {
   },
 
   {
+    "leoluz/nvim-dap-go",
+    ft = "go",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    opts = {},
+  },
+
+  {
     "folke/trouble.nvim",
+    event = "VeryLazy",
     cmd = { "TroubleToggle", "Trouble" },
     opts = function()
       return require "configs.trouble"
@@ -220,13 +272,6 @@ return {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
     opts = {},
-  },
-
-  {
-    "Chaitanyabsprip/fastaction.nvim",
-    opts = function()
-      return require "configs.fastaction"
-    end,
   },
 
   {
@@ -285,13 +330,22 @@ return {
   { "echasnovski/mini.bufremove", version = "*" },
 
   {
-    "ahmedkhalf/project.nvim",
-    event = "VeryLazy",
+    "coffebar/neovim-project",
     config = function()
-      local opts = require "configs.project"
-      require("project_nvim").setup(opts)
-      require("telescope").load_extension "projects"
+      local opts = require "configs.neovim-project"
+      require("neovim-project").setup(opts)
     end,
+    init = function()
+      -- enable saving the state of plugins in the session
+      vim.opt.sessionoptions:append "globals" -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
+    end,
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+      { "Shatur/neovim-session-manager" },
+    },
+    lazy = false,
+    priority = 100,
   },
 
   -- Javascript
@@ -300,16 +354,6 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     opts = {},
     event = "BufRead package.json",
-  },
-
-  -- Rust
-  {
-    "mrcjkb/rustaceanvim",
-    event = "VeryLazy",
-    version = "^5",
-    config = function()
-      require "configs.rustaceanvim"
-    end,
   },
 
   {
@@ -338,5 +382,40 @@ return {
       local opts = require "configs.diffview"
       require("diffview").setup(opts)
     end,
+  },
+  {
+    "utilyre/barbecue.nvim",
+    event = "VeryLazy",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    config = function()
+      require "configs.barbecue"
+    end,
+  },
+  {
+    "nvzone/typr",
+    dependencies = "nvzone/volt",
+    opts = {},
+    cmd = { "Typr", "TyprStats" },
+  },
+  {
+    "OXY2DEV/patterns.nvim",
+    cmd = { "Patterns" },
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
   },
 }
