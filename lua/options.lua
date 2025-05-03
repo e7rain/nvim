@@ -2,6 +2,7 @@ local opt = vim.opt
 local o = vim.o
 local g = vim.g
 
+-------------------------------------- options ------------------------------------------
 o.laststatus = 3
 o.showmode = false
 
@@ -48,6 +49,7 @@ g.loaded_python3_provider = 0
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 
+-- custom options
 o.spell = false -- sets vim.opt.spell
 o.spelllang = "es,en_us"
 o.spellsuggest = "fast,5"
@@ -61,8 +63,8 @@ opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldnestmax = 4
 
+-- add binaries installed by mason.nvim to path
 local is_windows = vim.fn.has "win32" ~= 0
 local sep = is_windows and "\\" or "/"
 local delim = is_windows and ";" or ":"
-
 vim.env.PATH = table.concat({ vim.fn.stdpath "data", "mason", "bin" }, sep) .. delim .. vim.env.PATH

@@ -1,94 +1,23 @@
 return {
   "nvim-lua/plenary.nvim",
-  {
-    cmd = "Treewalker",
-    "aaronik/treewalker.nvim",
 
-    -- The following options are the defaults.
-    -- Treewalker aims for sane defaults, so these are each individually optional,
-    -- and setup() does not need to be called, so the whole opts block is optional as well.
-    opts = {
-      -- Whether to briefly highlight the node after jumping to it
-      highlight = true,
-
-      -- How long should above highlight last (in ms)
-      highlight_duration = 500,
-
-      -- The color of the above highlight. Must be a valid vim highlight group.
-      -- (see :h highlight-group for options)
-      highlight_group = "CursorLine",
-    },
-  },
-  {
-    "nvchad/ui",
-    config = function()
-      require "nvchad"
-    end,
-  },
   {
     "nvchad/base46",
     build = function()
       require("base46").load_all_highlights()
     end,
   },
-  "nvchad/volt", -- optional, needed for theme switcher
-  {
-    "nvzone/minty",
-    cmd = { "Shades", "Huefy" },
-  },
 
   {
-    "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "b0o/SchemaStore.nvim", -- json schema store
-      "yioneko/nvim-vtsls", -- javascript utils
-    },
+    "nvchad/ui",
     config = function()
-      require "configs.lspconfig"
+      require "nvchad"
     end,
   },
 
-  {
-    "nvim-treesitter/nvim-treesitter",
-    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      local opts = require "configs.treesitter"
-      require("nvim-treesitter.configs").setup(opts)
-    end,
-  },
-
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    },
-    cmd = "Telescope",
-    opts = function()
-      return require "configs.telescope"
-    end,
-  },
-
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
-    cmd = "WhichKey",
-    opts = function()
-      dofile(vim.g.base46_cache .. "whichkey")
-      return {}
-    end,
-  },
-
-  {
-    "echasnovski/mini.files",
-    event = "VeryLazy",
-    config = function(_, opts)
-      local opts = require "configs.mini-files"
-      require("mini.files").setup(opts)
-    end,
-  },
+  "nvzone/volt",
+  "nvzone/menu",
+  { "nvzone/minty", cmd = { "Huefy", "Shades" } },
 
   {
     "nvim-tree/nvim-web-devicons",
@@ -101,35 +30,96 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "User FilePost",
-    config = function()
-      local opts = require "configs.indent-blankline"
+    opts = {
+      indent = { char = "│", highlight = "IblChar" },
+      scope = { char = "│", highlight = "IblScopeChar" },
+    },
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "blankline")
+
+      local hooks = require "ibl.hooks"
+      hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
       require("ibl").setup(opts)
+
+      dofile(vim.g.base46_cache .. "blankline")
     end,
   },
 
+  -- file managing , picker etc
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+  --   opts = function()
+  --     return require "nvchad.configs.nvimtree"
+  --   end,
+  -- },
+
+  {
+    "folke/which-key.nvim",
+    keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+    cmd = "WhichKey",
+    opts = function()
+      dofile(vim.g.base46_cache .. "whichkey")
+      return {}
+    end,
+  },
+
+  -- formatting!
+  {
+    "stevearc/conform.nvim",
+    event = "BufWritePre",
+    opts = function()
+      return require "configs.conform"
+    end,
+  },
+
+  -- git stuff
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "User FilePost",
+    opts = function()
+      return require "configs.gitsigns"
+    end,
+  },
+
+  -- lsp stuff
   {
     "williamboman/mason.nvim",
-    cmd = { "Mason" },
+    cmd = { "Mason", "MasonInstall", "MasonUpdate" },
     opts = function()
       return require "configs.mason"
     end,
   },
 
   {
+    "neovim/nvim-lspconfig",
+    event = "User FilePost",
+    dependencies = {
+      "b0o/SchemaStore.nvim", -- json schema store
+      "yioneko/nvim-vtsls", -- javascript utils
+    },
+    config = function()
+      require "configs.lspconfig"
+    end,
+  },
+
+  -- load luasnips + cmp related in insert mode only
+  {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
       {
+        -- snippet plugin
         "L3MON4D3/LuaSnip",
-        dependencies = {
-          "rafamadriz/friendly-snippets",
-        },
+        dependencies = "rafamadriz/friendly-snippets",
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
           require("luasnip").config.set_config(opts)
           require "configs.luasnip"
         end,
       },
+
+      -- autopairing of (){}[] etc
       {
         "windwp/nvim-autopairs",
         opts = {
@@ -138,10 +128,14 @@ return {
         },
         config = function(_, opts)
           require("nvim-autopairs").setup(opts)
+
+          -- setup cmp for autopairs
           local cmp_autopairs = require "nvim-autopairs.completion.cmp"
           require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end,
       },
+
+      -- cmp sources plugins
       {
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
@@ -165,18 +159,35 @@ return {
   },
 
   {
-    "stevearc/conform.nvim",
-    event = "VeryLazy",
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
+    cmd = "Telescope",
     opts = function()
-      return require "configs.conform"
+      return require "configs.telescope"
     end,
   },
 
   {
-    "lewis6991/gitsigns.nvim",
-    event = "User FilePost",
-    opts = function()
-      return require "configs.gitsigns"
+    "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+    build = ":TSUpdate",
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+    config = function()
+      local opts = require "configs.treesitter"
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+
+  {
+    "echasnovski/mini.files",
+    event = "VeryLazy",
+    config = function(_)
+      local opts = require "configs.mini-files"
+      require("mini.files").setup(opts)
     end,
   },
 
@@ -416,6 +427,25 @@ return {
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
+    },
+  },
+  {
+    cmd = "Treewalker",
+    "aaronik/treewalker.nvim",
+
+    -- The following options are the defaults.
+    -- Treewalker aims for sane defaults, so these are each individually optional,
+    -- and setup() does not need to be called, so the whole opts block is optional as well.
+    opts = {
+      -- Whether to briefly highlight the node after jumping to it
+      highlight = true,
+
+      -- How long should above highlight last (in ms)
+      highlight_duration = 500,
+
+      -- The color of the above highlight. Must be a valid vim highlight group.
+      -- (see :h highlight-group for options)
+      highlight_group = "CursorLine",
     },
   },
 }
