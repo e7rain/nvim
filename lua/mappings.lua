@@ -21,9 +21,8 @@ map("n", "-", function()
   files.reveal_cwd()
 end, { desc = "open directory" })
 
-map("n", "<leader>c", function()
-  require("mini.bufremove").delete()
-end, { desc = "Close buffer" })
+map("n", "<leader>c", Snacks.bufdelete.delete, { desc = "Close buffer" })
+map("n", "<leader>C", Snacks.bufdelete.all, { desc = "Close all buffers" })
 
 map({ "n", "t" }, "<c-space>", function()
   require("nvchad.term").toggle { pos = "float", id = "floatingTerm" }
@@ -64,7 +63,7 @@ map("n", "<leader>fm", function()
 end, { desc = "general format file" })
 
 map("n", "<leader>gg", "<cmd>Git<cr>", { desc = "Git" })
-map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "[g]it" })
+map("n", "<leader>lg", Snacks.lazygit.open, { desc = "[g]it" })
 map("n", "<leader>hh", require("gitsigns").preview_hunk_inline, { desc = "Preview hunk" })
 map("n", "<leader>gs", ":Gitsigns stage_hunk<CR>")
 map("v", "<leadergs", ":Gitsigns stage_hunk<CR>")

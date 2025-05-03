@@ -1,7 +1,10 @@
 return {
   -- Project directories
   projects = {
+    "~/Workspace/itg-rrhh/*",
     "~/Workspace/*",
+    "~/.config/nvim",
+    "~/Workspace/mw-integrations/packages/*",
     "~/Workspace/itg-dropshipping/packages/*",
   },
   -- Path to store history and sessions

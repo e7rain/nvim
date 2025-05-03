@@ -338,7 +338,6 @@ return {
       },
     },
   },
-  { "echasnovski/mini.bufremove", version = "*" },
 
   {
     "coffebar/neovim-project",
@@ -416,19 +415,7 @@ return {
     "OXY2DEV/patterns.nvim",
     cmd = { "Patterns" },
   },
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
+
   {
     cmd = "Treewalker",
     "aaronik/treewalker.nvim",
@@ -446,6 +433,39 @@ return {
       -- The color of the above highlight. Must be a valid vim highlight group.
       -- (see :h highlight-group for options)
       highlight_group = "CursorLine",
+    },
+  },
+
+  -- Snacks
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      bigfile = { enabled = true },
+      lazygit = { enabled = true },
+      notifier = { enabled = true },
+      toggle = {
+        enabled = true,
+        map = vim.keymap.set, -- keymap.set function to use
+        which_key = true, -- integrate with which-key to show enabled/disabled icons and colors
+        notify = true, -- show a notification when toggling
+        -- icons for enabled/disabled states
+        icon = {
+          enabled = " ",
+          disabled = " ",
+        },
+        -- colors for enabled/disabled states
+        color = {
+          enabled = "green",
+          disabled = "yellow",
+        },
+        wk_desc = {
+          enabled = "Disable ",
+          disabled = "Enable ",
+        },
+      },
     },
   },
 }

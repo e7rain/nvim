@@ -25,18 +25,22 @@ local opts = {
   },
   adapters = {
     require "neotest-jest" {
-      -- jestCommand = "pnpm run test --",
-      -- cwd = function(path) return vim.fn.getcwd() end,
+      -- jestCommand = "npm test --",
+      -- jestConfigFile = "custom.jest.config.ts",
+      -- env = { CI = true },
+      cwd = function(path)
+        return vim.fn.getcwd()
+      end,
     },
     -- require "neotest-python",
   },
   -- status = { virtual_text = true },
   -- output = { open_on_run = true },
-  -- quickfix = {
-  --   open = function()
-  --     require("trouble").open { mode = "quickfix", focus = true }
-  --   end,
-  -- },
+  quickfix = {
+    open = function()
+      require("trouble").open { mode = "quickfix", focus = true }
+    end,
+  },
 }
 
 return opts

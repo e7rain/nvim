@@ -63,6 +63,8 @@ opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldnestmax = 4
 
+o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.fn.has "win32" ~= 0
 local sep = is_windows and "\\" or "/"

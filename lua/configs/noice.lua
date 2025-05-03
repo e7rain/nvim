@@ -19,4 +19,13 @@ return {
   cmdline = {
     view = "cmdline", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
   },
+  routes = {
+    {
+      filter = {
+        event = "notify",
+        find = "No information available",
+      },
+      opts = { skip = true },
+    },
+  },
 }

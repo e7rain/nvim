@@ -27,6 +27,7 @@ require "autocmds"
 
 vim.schedule(function()
   require "mappings"
+  require "toggles"
 end)
 
 -- FIX: https://github.com/neovim/neovim/issues/31675
