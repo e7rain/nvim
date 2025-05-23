@@ -286,12 +286,6 @@ return {
   },
 
   {
-    "j-hui/fidget.nvim",
-    cmd = { "Fidget" },
-    event = "VeryLazy",
-  },
-
-  {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope", "TodoLocList", "TodoQuickFix" },
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -324,19 +318,6 @@ return {
       local opts = require "configs.surround"
       require("nvim-surround").setup(opts)
     end,
-  },
-
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {
-      modes = {
-        search = {
-          enabled = true,
-        },
-      },
-    },
   },
 
   {
@@ -381,31 +362,6 @@ return {
   },
 
   {
-    cmd = { "DiffviewOpen" },
-    "sindrets/diffview.nvim",
-    hooks = {
-      diff_buf_read = function(bufnr)
-        vim.b[bufnr].view_activated = false
-      end,
-    },
-    config = function()
-      local opts = require "configs.diffview"
-      require("diffview").setup(opts)
-    end,
-  },
-  {
-    "utilyre/barbecue.nvim",
-    event = "VeryLazy",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    config = function()
-      require "configs.barbecue"
-    end,
-  },
-  {
     "nvzone/typr",
     dependencies = "nvzone/volt",
     opts = {},
@@ -414,58 +370,5 @@ return {
   {
     "OXY2DEV/patterns.nvim",
     cmd = { "Patterns" },
-  },
-
-  {
-    cmd = "Treewalker",
-    "aaronik/treewalker.nvim",
-
-    -- The following options are the defaults.
-    -- Treewalker aims for sane defaults, so these are each individually optional,
-    -- and setup() does not need to be called, so the whole opts block is optional as well.
-    opts = {
-      -- Whether to briefly highlight the node after jumping to it
-      highlight = true,
-
-      -- How long should above highlight last (in ms)
-      highlight_duration = 500,
-
-      -- The color of the above highlight. Must be a valid vim highlight group.
-      -- (see :h highlight-group for options)
-      highlight_group = "CursorLine",
-    },
-  },
-
-  -- Snacks
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    ---@type snacks.Config
-    opts = {
-      bigfile = { enabled = true },
-      lazygit = { enabled = true },
-      notifier = { enabled = true },
-      toggle = {
-        enabled = true,
-        map = vim.keymap.set, -- keymap.set function to use
-        which_key = true, -- integrate with which-key to show enabled/disabled icons and colors
-        notify = true, -- show a notification when toggling
-        -- icons for enabled/disabled states
-        icon = {
-          enabled = " ",
-          disabled = " ",
-        },
-        -- colors for enabled/disabled states
-        color = {
-          enabled = "green",
-          disabled = "yellow",
-        },
-        wk_desc = {
-          enabled = "Disable ",
-          disabled = "Enable ",
-        },
-      },
-    },
   },
 }

@@ -30,9 +30,19 @@ dap.adapters.codelldb = {
   },
 }
 
+dap.adapters["pwa-node"] = {
+  type = "server",
+  host = "localhost",
+  port = "${port}",
+  executable = {
+    command = vim.fn.stdpath "data" .. "/mason/bin/js-debug-adapter",
+    args = { "${port}" },
+  },
+}
+
 dap.adapters["chrome"] = {
   type = "executable",
-  command = vim.fn.exepath "chrome-debug-adapter",
+  command = vim.fn.stdpath "data" .. "/mason/bin/chrome-debug-adapter",
 }
 
 -- Golang
@@ -49,13 +59,6 @@ local config_chrome_debug = {
     port = 9222,
     webRoot = "${workspaceFolder}",
   },
-}
-
-dap.adapters["pwa-node"] = {
-  type = "server",
-  host = "localhost",
-  port = "${port}",
-  executable = { command = vim.fn.exepath "js-debug-adapter", args = { "${port}" } },
 }
 
 local config_js_debug = {
@@ -84,17 +87,12 @@ local config_js_debug = {
   {
     type = "pwa-node",
     request = "launch",
-    name = "Launch current with ts-node",
+    name = "Launch with tsx",
     cwd = "${workspaceFolder}",
-    runtimeArgs = {
-      "-r",
-      "ts-node/register",
-    },
     -- runtimeArgs = {
-    --   "--loader",
-    --   "ts-node/esm",
+    --   "--inspect",
     -- },
-    runtimeExecutable = "node",
+    runtimeExecutable = "tsx",
     args = {
       "${file}",
     },

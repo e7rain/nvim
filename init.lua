@@ -15,7 +15,9 @@ local lazy_config = require "configs.lazy"
 
 -- load plugins
 require("lazy").setup({
-  { import = "plugins" },
+  spec = {
+    { import = "plugins" },
+  },
 }, lazy_config)
 
 -- load theme
@@ -27,7 +29,6 @@ require "autocmds"
 
 vim.schedule(function()
   require "mappings"
-  require "toggles"
 end)
 
 -- FIX: https://github.com/neovim/neovim/issues/31675

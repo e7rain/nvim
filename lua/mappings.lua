@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local map = vim.keymap.set
 
 map("n", "<leader>th", function()
@@ -23,17 +24,12 @@ end, { desc = "open directory" })
 
 map("n", "<leader>c", Snacks.bufdelete.delete, { desc = "Close buffer" })
 map("n", "<leader>C", Snacks.bufdelete.all, { desc = "Close all buffers" })
-
 map({ "n", "t" }, "<c-space>", function()
   require("nvchad.term").toggle { pos = "float", id = "floatingTerm" }
 end)
-
-map({ "n", "t" }, "<F4>", function()
-  require("nvchad.term").toggle { pos = "float", id = "floatingTerm" }
-end)
-
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "find files" })
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "find old files" })
 map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "live grep" })
 map("v", "<leader>fw", '"zy:Telescope live_grep default_text=<c-r>z<CR>', { desc = "live grep in visual mode" })
 map(
@@ -121,18 +117,6 @@ map({ "n", "x", "o" }, "s", require("flash").jump, { desc = "Flash" })
 map({ "n", "x", "o" }, "<leader>s", require("flash").treesitter, { desc = "Flash Treesitter" })
 map({ "x", "o" }, "r", require("flash").treesitter_search, { desc = "Flash Treesitter Search" })
 
--- movement
--- map({ "n", "v" }, "<A-k>", "<cmd>Treewalker Up<cr>", { silent = true })
--- map({ "n", "v" }, "<A-j>", "<cmd>Treewalker Down<cr>", { silent = true })
--- map({ "n", "v" }, "<A-h>", "<cmd>Treewalker Left<cr>", { silent = true })
--- map({ "n", "v" }, "<A-l>", "<cmd>Treewalker Right<cr>", { silent = true })
-
--- swap
-map({ "n" }, "<A-j>", "<cmd>Treewalker SwapDown<cr>", { silent = true })
-map({ "n" }, "<A-k>", "<cmd>Treewalker SwapUp<cr>", { silent = true })
-map({ "n" }, "<A-h>", "<cmd>Treewalker SwapLeft<cr>", { silent = true })
-map({ "n" }, "<A-l>", "<cmd>Treewalker SwapRight<cr>", { silent = true })
-
 -- Neotest
 map("n", "<leader>tt", require("neotest").run.run, { desc = "Run test" })
 map("n", "<leader>td", function()
@@ -147,9 +131,4 @@ map("n", "<leader>tP", require("neotest").output_panel.toggle, { desc = "Preview
 map("n", "[t", require("neotest").jump.prev, { desc = "Jump prev test" })
 map("n", "]t", require("neotest").jump.next, { desc = "Jump next test" })
 
-map("n", "<leader>un", require("utils").number, { desc = "Toggle numbers" })
-map("n", "<leader>us", require("utils").spell, { desc = "Toggle spell" })
-map("n", "<leader>uw", require("utils").wrap, { desc = "Toggle wrap" })
-map("n", "<leader>up", require("utils").autopairs, { desc = "Toggle autopair" })
-map("n", "<leader>uf", "<cmd>FormatToggle!<cr>", { desc = "autoformat toggle buffer" })
-map("n", "<leader>uF", "<cmd>FormatToggle<cr>", { desc = "autoformat toggle global" })
+map("n", "<leader>aa", "<cmd>CodeCompanionChat<cr>", { desc = "🤖 ia chat" })

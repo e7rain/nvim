@@ -40,6 +40,20 @@ M.term = {
   },
 }
 
+M.nvdash = {
+  load_on_startup = true,
+  header = {
+    "                            ",
+    "            eovim          ",
+    "                            ",
+  },
+  buttons = {
+    { txt = "  Projects", keys = "Spc l p", cmd = "NeovimProjectDiscover" },
+    { txt = "  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
+    { txt = "  Recent Files", keys = "Spc f o", cmd = "Telescope oldfiles" },
+  },
+}
+
 M.colorify = {
   enabled = true,
 }
@@ -78,11 +92,15 @@ M.base46 = {
     "lsp",
     "todo",
     "mason",
+    "syntax",
     "treesitter",
     "dap",
     "trouble",
-    "navic",
+    "blankline",
+    "devicons",
     "vim-illuminate",
+    "diffview",
+    "whichkey",
   },
 }
 
