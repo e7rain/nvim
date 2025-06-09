@@ -48,7 +48,7 @@ return {
   config = function()
     require("codecompanion").setup {
       opts = {
-        language = "English",
+        language = "Español",
         system_prompt = function(opts)
           return [[
 Eres un asistente de programación llamado «CodeCompanion». Actualmente estás conectado al editor de texto Neovim en la máquina de un usuario.
@@ -91,7 +91,7 @@ Cuando se le asigna una tarea:
           return require("codecompanion.adapters").extend("deepseek", {
             schema = {
               model = {
-                -- default = "deepseek-chat",
+                default = "deepseek-chat",
               },
             },
           })
@@ -110,6 +110,13 @@ Cuando se le asigna una tarea:
       strategies = {
         chat = {
           adapter = "deepseek",
+          intro_message = "Welcome to CodeCompanion ✨! Press ? for options",
+          show_header_separator = true, -- Show header separators in the chat buffer? Set this to false if you're using an external markdown formatting plugin
+          separator = "─", -- The separator between the different messages in the chat buffer
+          show_references = true, -- Show references (from slash commands and variables) in the chat buffer?
+          show_settings = true, -- Show LLM settings at the top of the chat buffer?
+          show_token_count = true, -- Show the token count for each response?
+          start_in_insert_mode = false, -- Open the chat buffer in insert mode?
           keymaps = {
             close = {
               modes = {

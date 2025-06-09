@@ -40,27 +40,27 @@ M.term = {
   },
 }
 
-M.nvdash = {
-  load_on_startup = true,
-  header = {
-    "                            ",
-    "            eovim          ",
-    "                            ",
-  },
-  buttons = {
-    { txt = "  Projects", keys = "Spc l p", cmd = "NeovimProjectDiscover" },
-    { txt = "  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
-    { txt = "  Recent Files", keys = "Spc f o", cmd = "Telescope oldfiles" },
-  },
-}
+-- M.nvdash = {
+--   load_on_startup = true,
+--   header = {
+--     "                            ",
+--     "            eovim          ",
+--     "                            ",
+--   },
+--   buttons = {
+--     { txt = "  Projects", keys = "Spc l p", cmd = "NeovimProjectDiscover" },
+--     { txt = "  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
+--     { txt = "  Recent Files", keys = "Spc f o", cmd = "Telescope oldfiles" },
+--   },
+-- }
 
 M.colorify = {
   enabled = true,
 }
 
 M.base46 = {
-  theme = "tokyonight",
-  theme_toggle = { "tokyonight", "tokyonight" },
+  theme = "everforest_light",
+  theme_toggle = { "everforest_light", "everforest_light" },
   hl_add = {
     FlashLabel = {
       bg = "baby_pink",
@@ -135,6 +135,8 @@ M.mason = {
     -- Go (Golang)
     "gopls",
     "goimports",
+    "impl",
+    "iferr",
     "delve",
 
     -- GraphQL

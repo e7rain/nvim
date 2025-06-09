@@ -24,6 +24,7 @@ local opts = {
     watching = "",
   },
   adapters = {
+    require "neotest-go",
     require "neotest-jest" {
       -- jestCommand = "npm test --",
       -- jestConfigFile = "custom.jest.config.ts",

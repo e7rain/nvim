@@ -52,7 +52,16 @@ capabilities.textDocument.completion.completionItem = {
   },
 }
 
-require("nvchad.lsp").diagnostic_config()
+-- require("nvchad.lsp").diagnostic_config()
+
+local x = vim.diagnostic.severity
+
+vim.diagnostic.config {
+  virtual_text = { prefix = "" },
+  signs = { text = { [x.ERROR] = "", [x.WARN] = "󰀧", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
+  underline = true,
+  float = { border = "single" },
+}
 
 vim.lsp.config("*", { capabilities = capabilities, on_init = on_init, on_attach = on_attach })
 
@@ -78,6 +87,11 @@ vim.lsp.config("lua_ls", {
 
 -- rust
 vim.lsp.config("rust_analyzer", {
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+  end,
+  on_init = on_init,
+  capabilities = capabilities,
   settings = {
     ["rust-analyzer"] = {
       checkOnSave = {

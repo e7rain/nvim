@@ -11,9 +11,6 @@ map({ "n", "x", "o" }, "L", "$")
 map("n", "<Tab>", "<Cmd>bn!<CR>", { desc = "next buffer" })
 map("n", "<S-Tab>", "<Cmd>bp!<CR>", { desc = "previous buffer" })
 
-map({ "n" }, "<leader>uc", require("minty.shades").open, { desc = "Shades color" })
-map({ "n" }, "<leader>uC", require("minty.huefy").open, { desc = "Shades color" })
-
 map("n", "-", function()
   local files = require "mini.files"
   if not files.close() then
@@ -44,15 +41,28 @@ map("n", "<leader>ft", "<cmd>Telescope terms<CR>", { desc = "telescope show term
 map("n", "<leader>fW", "<cmd>Telescope grep_string word_to_search=true<cr>", { desc = "Find word in files" })
 
 -- resize windows
-map({ "n", "t" }, "<c-left>", require("smart-splits").resize_left)
-map({ "n", "t" }, "<c-down>", require("smart-splits").resize_down)
-map({ "n", "t" }, "<c-up>", require("smart-splits").resize_up)
-map({ "n", "t" }, "<c-right>", require("smart-splits").resize_right)
+map({ "n", "t" }, "<c-s-h>", require("smart-splits").resize_left)
+map({ "n", "t" }, "<c-s-j>", require("smart-splits").resize_down)
+map({ "n", "t" }, "<c-s-k>", require("smart-splits").resize_up)
+map({ "n", "t" }, "<c-s-l>", require("smart-splits").resize_right)
 -- moving between splits
 map("n", "<c-h>", require("smart-splits").move_cursor_left, { desc = "move left window" })
 map("n", "<c-j>", require("smart-splits").move_cursor_down, { desc = "move down window" })
 map("n", "<c-k>", require("smart-splits").move_cursor_up, { desc = "move up window" })
 map("n", "<c-l>", require("smart-splits").move_cursor_right, { desc = "move right window" })
+
+-- -- treewalker
+-- -- movement
+-- map({ "n", "v" }, "<C-k>", "<cmd>Treewalker Up<cr>", { silent = true })
+-- map({ "n", "v" }, "<C-j>", "<cmd>Treewalker Down<cr>", { silent = true })
+-- map({ "n", "v" }, "<C-h>", "<cmd>Treewalker Left<cr>", { silent = true })
+-- map({ "n", "v" }, "<C-l>", "<cmd>Treewalker Right<cr>", { silent = true })
+--
+-- -- swapping
+-- map("n", "<C-S-k>", "<cmd>Treewalker SwapUp<cr>", { silent = true })
+-- map("n", "<C-S-j>", "<cmd>Treewalker SwapDown<cr>", { silent = true })
+-- map("n", "<C-S-h>", "<cmd>Treewalker SwapLeft<cr>", { silent = true })
+-- map("n", "<C-S-l>", "<cmd>Treewalker SwapRight<cr>", { silent = true })
 
 map("n", "<leader>fm", function()
   require("conform").format { lsp_fallback = true }

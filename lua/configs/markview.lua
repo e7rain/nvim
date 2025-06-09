@@ -6,6 +6,8 @@ return {
   headings = presets.simple,
   preview = {
     hybrid_modes = { "n" },
+    filetypes = { "markdown", "codecompanion" },
+    ignore_buftypes = {},
   },
   markdown = {
     list_items = {

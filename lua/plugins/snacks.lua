@@ -117,6 +117,24 @@ return {
             vim.cmd("Diffview" .. (state and "Open" or "Close"))
           end,
         }):map "<leader>G"
+        Snacks.toggle({
+          name = "🤖 Suggestions",
+          get = function()
+            return require("supermaven-nvim.api").is_running()
+          end,
+          set = function(state)
+            vim.cmd("Supermaven" .. (state and "Start" or "Stop"))
+          end,
+        }):map "<leader>ua"
+        -- Snacks.toggle({
+        --   name = "Hardtime",
+        --   get = function()
+        --     return require("hardtime").is_plugin_enabled == true
+        --   end,
+        --   set = function(state)
+        --     vim.cmd("💣 Hardtime" .. (state and " enable" or " disable"))
+        --   end,
+        -- }):map "<leader>uH"
       end,
     })
   end,
