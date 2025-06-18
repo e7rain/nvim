@@ -59,8 +59,8 @@ M.colorify = {
 }
 
 M.base46 = {
-  theme = "everforest_light",
-  theme_toggle = { "everforest_light", "everforest_light" },
+  theme = "blossom_light",
+  theme_toggle = { "blossom_light", "blossom_light" },
   hl_add = {
     FlashLabel = {
       bg = "baby_pink",

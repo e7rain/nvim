@@ -41,9 +41,9 @@ M.modules = {
       { severity = vim.diagnostic.severity.INFO }
     )
 
-    err = (err and err > 0) and ("%#DiagnosticError#" .. " " .. err .. " ") or ""
+    err = (err and err > 0) and ("%#DiagnosticError#" .. " " .. err .. " ") or ""
     warn = (warn and warn > 0) and ("%#DiagnosticWarn#" .. " " .. warn .. " ") or ""
-    hints = (hints and hints > 0) and ("%#DiagnosticHint#" .. "󰛩 " .. hints .. " ") or ""
+    hints = (hints and hints > 0) and ("%#DiagnosticHint#" .. "󰌵 " .. hints .. " ") or ""
     info = (info and info > 0) and ("%#DiagnosticInfo#" .. "󰋼 " .. info .. " ") or ""
 
     return " " .. err .. warn .. hints .. info

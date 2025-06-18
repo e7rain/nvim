@@ -58,12 +58,10 @@ local x = vim.diagnostic.severity
 
 vim.diagnostic.config {
   virtual_text = { prefix = "" },
-  signs = { text = { [x.ERROR] = "", [x.WARN] = "󰀧", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
+  signs = { text = { [x.ERROR] = "", [x.WARN] = "", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
   underline = true,
   float = { border = "single" },
 }
-
-vim.lsp.config("*", { capabilities = capabilities, on_init = on_init, on_attach = on_attach })
 
 -- lua
 vim.lsp.config("lua_ls", {
@@ -245,6 +243,8 @@ vim.lsp.config("clangd", {
 
 -- python
 vim.lsp.config("basedpyright", {
+  on_attach = on_attach,
+  capabilities = capabilities,
   before_init = function(_, c)
     if not c.settings then
       c.settings = {}
@@ -369,6 +369,8 @@ vim.lsp.config("graphql", {
     },
   },
 })
+
+vim.lsp.config("*", { capabilities = capabilities, on_init = on_init, on_attach = on_attach })
 
 vim.lsp.enable {
   "lua_ls",
