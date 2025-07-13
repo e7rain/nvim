@@ -11,8 +11,16 @@ local options = {
     typescriptreact = { "eslint", "prettierd", stop_after_first = true },
     javascriptreact = { "eslint", "prettierd", stop_after_first = true },
     graphql = { "prettierd", stop_after_first = true },
+    cs = { "csharpier" },
   },
   format_on_save = { timeout_ms = 500, lsp_fallback = true },
+  formatters = {
+    csharpier = {
+      command = vim.fn.stdpath "data" .. "/mason/bin/csharpier",
+      args = { "format", "--write-stdout" },
+      stdin = true,
+    },
+  },
 }
 
 return options

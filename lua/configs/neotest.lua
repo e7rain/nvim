@@ -33,7 +33,7 @@ local opts = {
         return vim.fn.getcwd()
       end,
     },
-    -- require "neotest-python",
+    require "neotest-dotnet",
   },
   -- status = { virtual_text = true },
   -- output = { open_on_run = true },

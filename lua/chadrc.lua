@@ -59,8 +59,8 @@ M.colorify = {
 }
 
 M.base46 = {
-  theme = "blossom_light",
-  theme_toggle = { "blossom_light", "blossom_light" },
+  theme = "nightfox",
+  theme_toggle = { "nightfox", "nightfox" },
   hl_add = {
     FlashLabel = {
       bg = "baby_pink",
@@ -130,7 +130,7 @@ M.mason = {
     "codelldb",
 
     -- Python
-    "basedpyright",
+    "pyrefly",
 
     -- Go (Golang)
     "gopls",
@@ -141,6 +141,11 @@ M.mason = {
 
     -- GraphQL
     "graphql-language-service-cli",
+
+    -- C#
+    "omnisharp",
+    "netcoredbg",
+    "csharpier",
   },
 }
 

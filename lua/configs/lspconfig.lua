@@ -242,36 +242,41 @@ vim.lsp.config("clangd", {
 })
 
 -- python
-vim.lsp.config("basedpyright", {
+vim.lsp.config("pyrefly", {
   on_attach = on_attach,
   capabilities = capabilities,
-  before_init = function(_, c)
-    if not c.settings then
-      c.settings = {}
-    end
-    if not c.settings.python then
-      c.settings.python = {}
-    end
-    c.settings.python.pythonPath = vim.fn.exepath "python"
-  end,
-  settings = {
-    basedpyright = {
-      analysis = {
-        typeCheckingMode = "basic",
-        autoImportCompletions = true,
-        diagnosticSeverityOverrides = {
-          reportUnusedImport = "information",
-          reportUnusedFunction = "information",
-          reportUnusedVariable = "information",
-          reportGeneralTypeIssues = "none",
-          reportOptionalMemberAccess = "none",
-          reportOptionalSubscript = "none",
-          reportPrivateImportUsage = "none",
-        },
-      },
-    },
-  },
+  cmd = { "pyrefly", "lsp" },
 })
+-- vim.lsp.config("basedpyright", {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   before_init = function(_, c)
+--     if not c.settings then
+--       c.settings = {}
+--     end
+--     if not c.settings.python then
+--       c.settings.python = {}
+--     end
+--     c.settings.python.pythonPath = vim.fn.exepath "python"
+--   end,
+--   settings = {
+--     basedpyright = {
+--       analysis = {
+--         typeCheckingMode = "basic",
+--         autoImportCompletions = true,
+--         diagnosticSeverityOverrides = {
+--           reportUnusedImport = "information",
+--           reportUnusedFunction = "information",
+--           reportUnusedVariable = "information",
+--           reportGeneralTypeIssues = "none",
+--           reportOptionalMemberAccess = "none",
+--           reportOptionalSubscript = "none",
+--           reportPrivateImportUsage = "none",
+--         },
+--       },
+--     },
+--   },
+-- })
 
 -- tailwindcss
 vim.lsp.config("tailwindcss", {
@@ -334,6 +339,19 @@ vim.lsp.config("emmet_ls", {
   },
 })
 
+vim.lsp.config("omnisharp", {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+  settings = {
+    omnisharp = {
+      enable_roslyn_analyzers = true,
+      organize_imports_on_format = true,
+      enable_import_completion = true,
+    },
+  },
+})
+
 -- graphql
 vim.lsp.config("graphql", {
   settings = {
@@ -381,10 +399,11 @@ vim.lsp.enable {
   "vtsls",
   "eslint",
   "clangd",
-  "basedpyright",
+  "pyrefly",
   "tailwindcss",
   "emmet_ls",
   "graphql",
   "html",
   "cssls",
+  "omnisharp",
 }

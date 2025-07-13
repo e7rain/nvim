@@ -45,6 +45,50 @@ dap.adapters["chrome"] = {
   command = vim.fn.stdpath "data" .. "/mason/bin/chrome-debug-adapter",
 }
 
+dap.adapters.coreclr = {
+  type = "executable",
+  command = vim.fn.stdpath "data" .. "/mason/bin/netcoredbg",
+  args = { "--interpreter=vscode" },
+}
+
+dap.adapters.netcoredbg = {
+  type = "executable",
+  command = vim.fn.stdpath "data" .. "/mason/bin/netcoredbg",
+  args = { "--interpreter=vscode" },
+}
+
+dap.configurations.cs = {
+  {
+    type = "coreclr",
+    name = "launch - netcoredbg",
+    request = "launch",
+    program = function()
+      return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/net9.0/", "file")
+    end,
+
+    -- justMyCode = false,
+    -- stopAtEntry = false,
+    -- -- program = function()
+    -- --   -- todo: request input from ui
+    -- --   return "/path/to/your.dll"
+    -- -- end,
+    -- env = {
+    --   ASPNETCORE_ENVIRONMENT = function()
+    --     -- todo: request input from ui
+    --     return "Development"
+    --   end,
+    --   ASPNETCORE_URLS = function()
+    --     -- todo: request input from ui
+    --     return "http://localhost:5050"
+    --   end,
+    -- },
+    -- cwd = function()
+    --   -- todo: request input from ui
+    --   return vim.fn.getcwd()
+    -- end,
+  },
+}
+
 -- Golang
 
 local config_chrome_debug = {

@@ -37,6 +37,9 @@ return {
     "gomod",
     "gosum",
     "gowork",
+    -- csharp
+    "c_sharp",
+    "bicep",
   },
 
   highlight = {

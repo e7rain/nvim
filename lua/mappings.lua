@@ -41,10 +41,10 @@ map("n", "<leader>ft", "<cmd>Telescope terms<CR>", { desc = "telescope show term
 map("n", "<leader>fW", "<cmd>Telescope grep_string word_to_search=true<cr>", { desc = "Find word in files" })
 
 -- resize windows
-map({ "n", "t" }, "<c-s-h>", require("smart-splits").resize_left)
-map({ "n", "t" }, "<c-s-j>", require("smart-splits").resize_down)
-map({ "n", "t" }, "<c-s-k>", require("smart-splits").resize_up)
-map({ "n", "t" }, "<c-s-l>", require("smart-splits").resize_right)
+map({ "n", "t" }, "<c-left>", require("smart-splits").resize_left)
+map({ "n", "t" }, "<c-down>", require("smart-splits").resize_down)
+map({ "n", "t" }, "<c-up>", require("smart-splits").resize_up)
+map({ "n", "t" }, "<c-right>", require("smart-splits").resize_right)
 -- moving between splits
 map("n", "<c-h>", require("smart-splits").move_cursor_left, { desc = "move left window" })
 map("n", "<c-j>", require("smart-splits").move_cursor_down, { desc = "move down window" })
